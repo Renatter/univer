@@ -18,8 +18,8 @@
           <li>Техподдержка</li>
         </ul>
       </nav>
-      <button v-if="isLoggedIn" @click="logout" class="btn">Выход</button>
-      <button v-else @click="goToRegister" class="btn">Регистрация</button>
+      <button v-if="isAuthenticated" @click="logout" class="btn">Выход</button>
+      <button v-else @click="goToLogin" class="btn">Войти</button>
     </div>
   </div>
 </template>
@@ -30,37 +30,19 @@ export default {
   data() {
     return {
       isAuthenticated: false,
-      isLoggedIn: false,
-      currentUser: null,
     };
   },
-  computed: {
-    isLoggedIn() {
-      return this.isAuthenticated;
-    },
-  },
   methods: {
-    goToRegister() {
-      this.$router.push("/register");
+    goToLogin() {
+      this.$router.push("/login");
     },
     logout() {
       auth.signOut();
     },
   },
-  watch: {
-    isAuthenticated: function (newValue, oldValue) {
-      this.isLoggedIn = newValue;
-    },
-  },
   created() {
     auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.isAuthenticated = true;
-        this.currentUser = user;
-      } else {
-        this.isAuthenticated = false;
-        this.currentUser = null;
-      }
+      this.isAuthenticated = user !== null;
     });
   },
 };
@@ -127,3 +109,36 @@ li {
   transition: 0.2s;
 }
 </style>
+
+<!-- computed: {
+    isLoggedIn() {
+      return this.currentUser !== null;
+    },
+  },
+  methods: {
+    goToRegister() {
+      this.$router.push("/register");
+    },
+    logout() {
+      auth.signOut();
+    },
+  },
+  created() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        if (this.isNewUser) {
+          // проверяем, является ли пользователь только что зарегистрированным
+          this.isNewUser = false;
+        } else {
+          this.isAuthenticated = true; // устанавливаем isAuthenticated в true, только если пользователь не был только что зарегистрирован
+        }
+        this.currentUser = user;
+      } else {
+        this.isAuthenticated = false;
+        this.currentUser = null;
+      }
+    });
+  },
+  mounted() {
+    this.isNewUser = this.$route.query.newUser === "true"; // получаем значение параметра запроса newUser и устанавливаем isNewUser в true, если параметр равен "true"
+  }, -->

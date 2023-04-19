@@ -4,6 +4,7 @@ import {
 } from 'vue-router';
 import HelloWorld from '../components/HelloWorld.vue'
 import Reg from "../components/Reg.vue"
+import Login from "../components/Login.vue"
 const router = createRouter({
 
     history: createWebHistory(),
@@ -15,8 +16,13 @@ const router = createRouter({
         },
         {
             path: '/register',
-            name: '/register',
+            name: 'register',
             component: Reg,
+        },
+        {
+            path: '/Login',
+            name: 'Login',
+            component: Login,
         },
 
 

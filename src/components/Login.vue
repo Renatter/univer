@@ -1,9 +1,9 @@
 <template>
   <div class="auth-container">
     <div class="auth-box" v-if="!currentUser">
-      <h1>Register</h1>
-      <router-link to="/Login">Login</router-link>
-      <form class="auth-form" @submit.prevent="register">
+      <h1>Login</h1>
+      <router-link to="/register">Register</router-link>
+      <form class="auth-form" @submit.prevent="sign">
         <input
           class="auth-input"
           placeholder="Email address..."
@@ -15,7 +15,7 @@
           v-model="pass"
           type="password"
         />
-        <button class="auth-btn">Register</button>
+        <button class="auth-btn">Login</button>
       </form>
     </div>
   </div>
@@ -37,11 +37,9 @@ export default {
     };
   },
   methods: {
-    async register() {
-      await createUserWithEmailAndPassword(auth, this.email, this.pass);
-      this.hange = !this.hange;
-      await signInWithEmailAndPassword(auth, this.email, this.pass);
-      this.currentUser = auth.currentUser;
+    async sign() {
+      signInWithEmailAndPassword(auth, this.email, this.pass);
+      console.log(this.email, this.pass);
       this.$router.push({
         name: "HelloWorld",
       });
