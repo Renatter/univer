@@ -30,13 +30,10 @@
       <div class="profil_text ml-[30px]">
         <div class="name flex">
           <div>
-            <div
-              v-if="isEditing || !imageUrl"
-              class="items-center justify-center w-full"
-            >
+            <div v-if="isEditing" class="items-center justify-center w-full">
               <label
                 for="dropzone-file"
-                class="flex flex-col items-center justify-center w-[150px] h-[150px] border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                class="flex flex-col items-center justify-center w-[150px] h-[150px] border-2 border-[#22c55e] border-dashed rounded-full cursor-pointer bg-[#f2faf5]"
               >
                 <div
                   class="flex flex-col items-center justify-center pt-5 pb-6"
@@ -71,19 +68,29 @@
                 />
               </label>
               <button
-                class="mt-[15px] focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 0"
+                class="mt-[15px] focus:outline-none text-white bg-[#86efac] hover:bg-[#51d180] focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 0"
                 @click="uploadImage"
               >
                 Upload Image
               </button>
-              <p v-if="textImg" class="text-[#4ade80]">Обновите сайт</p>
+              <p v-if="textImg" class="text-[#4ade80]">Нажмите Save</p>
             </div>
-            <img
-              v-else
-              class="w-[150px] rounded-full max-h-[150px]"
-              :src="imageUrl"
-              alt="Нет фотографии"
-            />
+            <div v-else>
+              <div v-if="!imageUrl">
+                <img
+                  class="w-[150px] rounded-full max-h-[150px]"
+                  :src="gray"
+                  alt="Нет фотографии"
+                />
+              </div>
+              <div v-else>
+                <img
+                  class="w-[150px] rounded-full max-h-[150px]"
+                  :src="imageUrl"
+                  alt="Нет фотографии"
+                />
+              </div>
+            </div>
           </div>
 
           <div class="name pl-[30px]">
@@ -91,12 +98,12 @@
               <input
                 v-model="firstName"
                 type="text"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:border-blue-500"
+                class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500"
               />
               <input
                 v-model="lastName"
                 type="text"
-                class="ml-[15px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:border-blue-500"
+                class="ml-[15px] bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500"
               />
             </div>
             <div v-else class="flex">
@@ -193,19 +200,19 @@
                       v-model="day"
                       placeholder="day"
                       type="text"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[100px] p-2.5 dark:focus:border-blue-500"
+                      class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-[100px] p-2.5 dark:bg-gray-700 dark:border-green-500"
                     />
                     <input
                       v-model="month"
                       placeholder="month"
                       type="text"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[100px] ml-[15px] p-2.5 dark:focus:border-blue-500"
+                      class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block ml-[15px] w-[100px] p-2.5 dark:bg-gray-700 dark:border-green-500"
                     />
                     <input
                       v-model="year"
                       placeholder="year"
                       type="text"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[100px] ml-[15px] p-2.5 dark:focus:border-blue-500"
+                      class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block ml-[15px] w-[100px] p-2.5 dark:bg-gray-700 dark:border-green-500"
                     />
                   </div>
                   <p v-else class="text-[#000000] pt-[24px] font-bold">
@@ -220,7 +227,7 @@
                     <input
                       v-model="phone"
                       type="text"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:border-blue-500"
+                      class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500"
                     />
                   </div>
                   <p v-else class="text-[#000000] pt-[44px] font-bold">
@@ -236,7 +243,7 @@
                       <div>
                         <select
                           id="letters"
-                          class="h-[40px] bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[350px] text-[18px]"
+                          class="h-[40px] bg-green-50 border border-green-500 text-green-900 dark:text-green-400 rounded-lg focus:ring-green-500 focus:border-green-500 block w-[350px] text-[18px]"
                           v-model="selectedLetter"
                         >
                           <option value="Ақпараттық технологиялар">
@@ -264,7 +271,7 @@
                       <select
                         id="countries"
                         v-model="group"
-                        class="h-[40px] bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[90px] text-[18px]"
+                        class="h-[40px] bg-green-50 border border-green-500 text-green-900 dark:text-green-400 rounded-lg focus:ring-green-500 focus:border-green-500 block w-[90px] text-[18px]"
                       >
                         <option
                           v-for="country in filteredCountries"
@@ -328,6 +335,7 @@ export default {
   },
   data() {
     return {
+      gray: "http://pic.rutubelist.ru/user/3e/a8/3ea8627a505f6a5e3487fa234dfa112b.jpg",
       currentUser: null,
       uid: null,
       firstName: null,
