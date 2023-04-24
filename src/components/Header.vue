@@ -38,6 +38,7 @@ export default {
     },
     logout() {
       auth.signOut();
+      this.$router.push("/");
     },
   },
   created() {
@@ -52,8 +53,8 @@ export default {
 .header {
   font-family: "Forum", cursive;
 
-  font-size: 20px;
-  padding: 20px;
+  font-size: 15px;
+  padding: 50px;
   align-items: center;
   height: 50px;
   display: flex;
@@ -109,36 +110,3 @@ li {
   transition: 0.2s;
 }
 </style>
-
-<!-- computed: {
-    isLoggedIn() {
-      return this.currentUser !== null;
-    },
-  },
-  methods: {
-    goToRegister() {
-      this.$router.push("/register");
-    },
-    logout() {
-      auth.signOut();
-    },
-  },
-  created() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        if (this.isNewUser) {
-          // проверяем, является ли пользователь только что зарегистрированным
-          this.isNewUser = false;
-        } else {
-          this.isAuthenticated = true; // устанавливаем isAuthenticated в true, только если пользователь не был только что зарегистрирован
-        }
-        this.currentUser = user;
-      } else {
-        this.isAuthenticated = false;
-        this.currentUser = null;
-      }
-    });
-  },
-  mounted() {
-    this.isNewUser = this.$route.query.newUser === "true"; // получаем значение параметра запроса newUser и устанавливаем isNewUser в true, если параметр равен "true"
-  }, -->

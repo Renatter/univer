@@ -5,6 +5,7 @@ import {
 import HelloWorld from '../components/HelloWorld.vue'
 import Reg from "../components/Reg.vue"
 import Login from "../components/Login.vue"
+import Profile from "../views/Profile.vue"
 const router = createRouter({
 
     history: createWebHistory(),
@@ -24,6 +25,11 @@ const router = createRouter({
             name: 'Login',
             component: Login,
         },
+        {
+            path: '/Profile',
+            name: 'Profile',
+            component: Profile,
+        }
 
 
 
