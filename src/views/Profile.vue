@@ -458,7 +458,9 @@ export default {
         year: this.year,
       });
       this.isEditing = false;
-      location.reload();
+      this.$router.push({
+        name: "Profile",
+      });
       console.log(this.firstName);
     },
   },
