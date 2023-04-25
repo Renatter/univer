@@ -1,6 +1,6 @@
 <template>
   <div class="r" v-if="currentUser && currentUser.email">
-    <h1 class="text-[35px] font-bold">Account</h1>
+    <h1 class="text-[35px] font-bold">{{ currentUser.uid }}</h1>
 
     <div class="profile-info flex items-stretch pt-[50px]">
       <div class="btn flex flex-col w-[240px]">
@@ -435,14 +435,6 @@ export default {
       this.textImg = !this.textImg;
     },
 
-    async deleteImage(index) {
-      const imageUrl = this.imageUrls[index];
-      const imageRef = refFromURL(storage, imageUrl);
-      await deleteObject(imageRef);
-
-      this.imageUrls.splice(index, 1);
-    },
-
     async saveAccount() {
       const birhDay = this.day + "." + this.month + "." + this.year;
       const userDocRef = doc(db, "users", this.currentUser.uid);
@@ -451,20 +443,33 @@ export default {
         gender: this.pol,
         phone: this.phone,
         group: this.group,
-        corpus: this.corpus,
+        corpus: this.selectedLetter,
         birth: birhDay,
         day: this.day,
         month: this.month,
         year: this.year,
       });
       this.isEditing = false;
-      this.$router.push({
-        name: "Profile",
-      });
-      console.log(this.firstName);
+
+      if (this.file) {
+        // Загружаем изображение на сервер
+        const storageRef = ref(
+          storage,
+          `images/${this.currentUser.uid}/${this.file.name}`
+        );
+        await uploadBytes(storageRef, this.file);
+        const downloadUrl = await getDownloadURL(storageRef);
+
+        this.imageUrl = downloadUrl;
+
+        // Обновляем запись пользователя в Firestore
+        await updateDoc(userDocRef, {
+          imageUrl: downloadUrl,
+        });
+      }
     },
   },
-  created() {
+  async created() {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         this.currentUser = user;
