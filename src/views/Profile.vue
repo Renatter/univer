@@ -1,7 +1,7 @@
 <template>
   <div class="r" v-if="currentUser && currentUser.email">
     <h1 class="text-[35px] font-bold">{{ currentUser.uid }}</h1>
-
+    {{ loginCount }}
     <div class="profile-info flex items-stretch pt-[50px]">
       <div class="btn flex flex-col w-[240px]">
         <button
@@ -32,6 +32,7 @@
           <div>
             <div v-if="isEditing" class="items-center justify-center w-full">
               <label
+                @click="showBtn = true"
                 for="dropzone-file"
                 class="flex flex-col items-center justify-center w-[150px] h-[150px] border-2 border-[#22c55e] border-dashed rounded-full cursor-pointer bg-[#f2faf5]"
               >
@@ -68,6 +69,7 @@
                 />
               </label>
               <button
+                v-if="showBtn"
                 class="mt-[15px] focus:outline-none text-white bg-[#86efac] hover:bg-[#51d180] focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 0"
                 @click="uploadImage"
               >
@@ -115,7 +117,6 @@
             <div class="user_info flex">
               <div class="info_list">
                 <p class="text-[#94a3b8] pt-[34px]">Пол</p>
-                <p class="text-[#94a3b8] pt-[34px]">Дата рождения</p>
                 <p class="text-[#94a3b8] pt-[46px]">Дата регистрации</p>
                 <p class="text-[#94a3b8] pt-[34px]">Номер телефона</p>
                 <p class="text-[#94a3b8] pt-[34px]">Эл. почта</p>
@@ -125,7 +126,7 @@
                   v-if="!isEditing"
                   @click="swithRed"
                   type="button"
-                  class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 0"
+                  class="focus:outline-none mt-[5px] text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 0"
                 >
                   Редактировать
                 </button>
@@ -133,16 +134,9 @@
                   <button
                     @click="saveAccount"
                     type="button"
-                    class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
+                    class="w-[200px] focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-[7px]"
                   >
                     Save
-                  </button>
-                  <button
-                    @click="isEditing = false"
-                    type="button"
-                    class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900"
-                  >
-                    Cancel
                   </button>
                 </div>
               </div>
@@ -194,36 +188,12 @@
                     {{ gender }}
                   </p>
                 </div>
-                <div>
-                  <div v-if="isEditing" class="pt-[25px] flex">
-                    <input
-                      v-model="day"
-                      placeholder="day"
-                      type="text"
-                      class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-[100px] p-2.5 dark:bg-gray-700 dark:border-green-500"
-                    />
-                    <input
-                      v-model="month"
-                      placeholder="month"
-                      type="text"
-                      class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block ml-[15px] w-[100px] p-2.5 dark:bg-gray-700 dark:border-green-500"
-                    />
-                    <input
-                      v-model="year"
-                      placeholder="year"
-                      type="text"
-                      class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block ml-[15px] w-[100px] p-2.5 dark:bg-gray-700 dark:border-green-500"
-                    />
-                  </div>
-                  <p v-else class="text-[#000000] pt-[24px] font-bold">
-                    {{ birth }}
-                  </p>
-                </div>
-                <p class="text-[#000000] pt-[44px] font-bold">
+
+                <p class="text-[#b3b3b3] pt-[44px] font-bold">
                   {{ currentUser.metadata.creationTime }}
                 </p>
                 <div>
-                  <div class="pt-[12px]" v-if="isEditing">
+                  <div class="pt-[30px]" v-if="isEditing">
                     <input
                       v-model="phone"
                       type="text"
@@ -234,7 +204,7 @@
                     {{ phone }}
                   </p>
                 </div>
-                <p class="text-[#000000] pt-[24px] font-bold">
+                <p class="text-[#b3b3b3] pt-[24px] font-bold">
                   {{ currentUser.email }}
                 </p>
                 <div>
@@ -262,7 +232,7 @@
                     </div>
                   </div>
                   <p v-else class="text-[#000000] pt-[44px] font-bold">
-                    {{ corpus }}
+                    {{ selectedLetter }}
                   </p>
                 </div>
                 <div>
@@ -293,20 +263,26 @@
                   </div>
                 </div>
 
-                <button
-                  @click="deleteAccount"
-                  type="button"
-                  class="pt-[11px] focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                >
-                  Удалить аккаунт
-                </button>
+                <div>
+                  <button
+                    v-if="showBtn"
+                    @click="deleteAccount"
+                    type="button"
+                    class="pt-[11px] focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  >
+                    Удалить аккаунт
+                  </button>
+                  <p v-else class="text-red-700">
+                    чтобы удалить учетную запись, добавьте фотографию или
+                    войдите в систему снова
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div></div>
   </div>
 </template>
 
@@ -335,9 +311,15 @@ export default {
   },
   data() {
     return {
+      showBtn: false,
+      loginCount: 0,
+
       gray: "http://pic.rutubelist.ru/user/3e/a8/3ea8627a505f6a5e3487fa234dfa112b.jpg",
+      visitedDeletePage: false,
       currentUser: null,
       uid: null,
+
+      showBtn: false,
       firstName: null,
       lastName: null,
       pol: "Муж",
@@ -345,10 +327,7 @@ export default {
       corpus: null,
       gender: null,
       isActive: true,
-      birth: null,
-      day: null,
-      month: null,
-      year: null,
+
       phone: null,
       selectedLetter: "",
       isEditing: false,
@@ -356,11 +335,12 @@ export default {
       imageUrl: "",
       textImg: false,
       imageUrls: [],
+      corpus: "",
       countries: [
         { label: "ИС-11", value: "IS11", letter: "Ақпараттық технологиялар" },
         { label: "ИС-32", value: "IS32", letter: "Ақпараттық технологиялар" },
         { label: "ИС-33", value: "IS33", letter: "Ақпараттық технологиялар" },
-        { label: "ИС-22", value: "IS34", letter: "Ақпараттық технологиялар" },
+        { label: "ИС-34", value: "IS34", letter: "Ақпараттық технологиялар" },
 
         { label: "БАН-21", value: "BAN21", letter: "Экономика және аудит" },
         { label: "БАН-22", value: "BAN22", letter: "Экономика және аудит" },
@@ -436,7 +416,6 @@ export default {
     },
 
     async saveAccount() {
-      const birhDay = this.day + "." + this.month + "." + this.year;
       const userDocRef = doc(db, "users", this.currentUser.uid);
       await updateDoc(userDocRef, {
         firstName: this.firstName,
@@ -444,10 +423,6 @@ export default {
         phone: this.phone,
         group: this.group,
         corpus: this.selectedLetter,
-        birth: birhDay,
-        day: this.day,
-        month: this.month,
-        year: this.year,
       });
       this.isEditing = false;
 
@@ -480,20 +455,24 @@ export default {
         const userDoc = await getDoc(userDocRef);
 
         if (userDoc.exists()) {
+          this.loginCount = userDoc.data().loginCount || 0;
           this.firstName = userDoc.data().firstName;
           this.lastName = userDoc.data().lastName;
           this.uid = this.currentUser.uid;
           this.group = userDoc.data().group;
-          this.corpus = userDoc.data().corpus;
+          this.selectedLetter = userDoc.data().corpus;
           this.gender = userDoc.data().gender;
-          this.birth = userDoc.data().birth;
+
           this.phone = userDoc.data().phone;
           this.imageUrl = userDoc.data().profilePictureUrl || "";
         } else {
           console.log("No such document!");
         }
+        updateDoc(userDocRef, { loginCount: this.loginCount + 1 });
 
-        // Get the user's image urls
+        if (this.loginCount >= 2) {
+          this.showBtn = true;
+        }
         const imagesRef = ref(storage, `images/${this.currentUser.uid}`);
         const images = await listAll(imagesRef);
         console.log(imagesRef);
@@ -510,6 +489,11 @@ export default {
         this.currentUser = null;
       }
     });
+  },
+  watch: {
+    pol(newVal) {
+      this.gender = newVal === "Муж" ? "Муж" : "Жен";
+    },
   },
 };
 </script>

@@ -274,6 +274,7 @@ export default {
         firstName: this.firstName,
         lastName: this.lastname,
         email: emaildom,
+        loginCount: 0,
         corpus: this.selectedLetter,
         group: this.group,
         gender: this.pol,
