@@ -73,7 +73,7 @@
                 class="mt-[15px] focus:outline-none text-white bg-[#86efac] hover:bg-[#51d180] focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 0"
                 @click="uploadImage"
               >
-                Upload Image
+                Добавить фото
               </button>
               <p v-if="textImg" class="text-[#4ade80]">Нажмите Save</p>
             </div>
