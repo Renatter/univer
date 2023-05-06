@@ -1,32 +1,9 @@
 <template>
-  <div class="r" v-if="currentUser && currentUser.email">
-    <h1 class="text-[35px] font-bold">{{ currentUser.uid }}</h1>
-    {{ loginCount }}
-    <div class="profile-info flex items-stretch pt-[50px]">
-      <div class="btn flex flex-col w-[240px]">
-        <button
-          :class="[
-            'text-black font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2',
-            isActive
-              ? ' bg-blue-700 text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
-              : ' bg-white border border-gray-300 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 ',
-          ]"
-          @click="isActive = true"
-        >
-          Личные данные
-        </button>
-        <button
-          :class="[
-            'text-black font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2',
-            !isActive
-              ? 'bg-blue-700 text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
-              : 'bg-white border border-gray-300 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300',
-          ]"
-          @click="isActive = false"
-        >
-          Общежитие
-        </button>
-      </div>
+  <div class="bg-[#F4F4F7] w-full ml-[25px] rounded-[15px] p-[25px] h-[800px]">
+    <div
+      v-if="currentUser && currentUser.email"
+      class="profile-info flex items-stretch pt-[50px]"
+    >
       <div class="profil_text ml-[30px]">
         <div class="name flex">
           <div>
@@ -283,6 +260,7 @@
         </div>
       </div>
     </div>
+    <div v-else>Войдите в аккаунт</div>
   </div>
 </template>
 
@@ -291,13 +269,7 @@ import InputComp from "../components/InputComp.vue";
 import { storage, db, auth } from "../firebase/index";
 
 import { onAuthStateChanged } from "firebase/auth";
-import {
-  doc,
-  deleteDoc,
-  updateDoc,
-  onSnapshot,
-  getDoc,
-} from "firebase/firestore";
+import { doc, deleteDoc, updateDoc, getDoc } from "firebase/firestore";
 import {
   ref,
   uploadBytes,
@@ -314,7 +286,7 @@ export default {
       showBtn: false,
       loginCount: 0,
 
-      gray: "http://pic.rutubelist.ru/user/3e/a8/3ea8627a505f6a5e3487fa234dfa112b.jpg",
+      gray: "https://ob-kassa.ru/content/front/buhoskol_tmp1/images/reviews-icon.jpg",
       visitedDeletePage: false,
       currentUser: null,
       uid: null,
@@ -470,7 +442,7 @@ export default {
         }
         updateDoc(userDocRef, { loginCount: this.loginCount + 1 });
 
-        if (this.loginCount >= 2) {
+        if (this.loginCount > 1) {
           this.showBtn = true;
         }
         const imagesRef = ref(storage, `images/${this.currentUser.uid}`);

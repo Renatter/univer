@@ -6,6 +6,10 @@ import HelloWorld from '../components/HelloWorld.vue'
 import Reg from "../components/Reg.vue"
 import Login from "../components/Login.vue"
 import Profile from "../views/Profile.vue"
+import Hostel from "../views/Hostel.vue"
+import Payment from "../views/Payment.vue"
+import Search from "../views/Search.vue"
+import Rules from "../views/Rules.vue"
 const router = createRouter({
 
     history: createWebHistory(),
@@ -29,6 +33,26 @@ const router = createRouter({
             path: '/Profile',
             name: 'Profile',
             component: Profile,
+        },
+        {
+            path: '/Hostel',
+            name: 'Hostel',
+            component: Hostel,
+        },
+        {
+            path: '/Payment',
+            name: 'Payment',
+            component: Payment,
+        },
+        {
+            path: '/Search',
+            name: 'Search',
+            component: Search,
+        },
+        {
+            path: '/Rules',
+            name: 'Rules',
+            component: Rules,
         }
 
 

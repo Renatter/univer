@@ -1,6 +1,6 @@
 <template>
   <div v-if="loading">Loading...</div>
-  <div v-else>
+  <div v-else class="bg-[#F4F4F7] w-full ml-[25px] rounded-[15px] p-[25px]">
     <div class="reg-bg">
       <div v-if="!currentUser">
         <h1 class="text-4xl font-bold text-center text-blue-500">Register!</h1>
@@ -189,11 +189,6 @@
           >У меня есть аккаунт</router-link
         >
       </div>
-      <img
-        class="rounded-[30px] ml-[25px]"
-        src="https://images.unsplash.com/photo-1498079022511-d15614cb1c02?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-        alt=""
-      />
     </div>
   </div>
 </template>
@@ -292,10 +287,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.reg-bg {
-  padding-top: 100px;
-}
-
 * {
   font-family: "Forum", cursive;
 }
