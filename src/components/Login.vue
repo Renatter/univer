@@ -1,15 +1,17 @@
 <template>
-  <div class="bg-[#F4F4F7] w-full ml-[25px] rounded-[15px] p-[25px]">
+  <div class="bg-[#F4F4F7] w-full ml-[25px] rounded-[15px] p-[25px] bg-[#FFFF]">
     <div class="reg-bg">
-      <div v-if="!currentUser">
-        <h1 class="text-4xl font-bold text-center text-blue-500">Login!</h1>
+      <div v-if="!currentUser" class="bg-[#FFFF]">
+        <h1 class="text-4xl font-bold text-center text-blue-500 bg-[#FFFF]">
+          Login!
+        </h1>
 
-        <form @submit.prevent="sign" class="pt-[50px]">
-          <div class="flex-box">
-            <div class="mb-6 mr-[15px]">
+        <form @submit.prevent="sign" class="pt-[50px] bg-[#FFFF]">
+          <div class="flex-box bg-[#FFFF]">
+            <div class="mb-6 mr-[15px] bg-[#FFFF]">
               <label
                 for="text"
-                class="block mb-2 text-sm font-medium text-gray-900 text-[18px]"
+                class="block mb-2 text-sm font-medium text-gray-900 text-[18px] bg-[#FFFF]"
                 >Email</label
               >
               <input
@@ -21,7 +23,7 @@
                 required
               />
             </div>
-            <div class="mr-[15px]">
+            <div class="mr-[15px] bg-[#FFFF]">
               <input
                 type="text"
                 id="disabled-input"
@@ -33,13 +35,13 @@
             </div>
           </div>
 
-          <div class="mb-6">
+          <div class="mb-6 bg-[#FFFF]">
             <label
               for="password"
-              class="block mb-2 text-sm font-medium text-gray-900 text-[18px]"
+              class="block mb-2 text-sm font-medium text-gray-900 text-[18px] bg-[#FFFF]"
               >Your password</label
             >
-            <div class="flex-box items-center">
+            <div class="flex-box items-center bg-[#FFFF]">
               <input
                 v-model="pass"
                 :type="showPassword ? 'text' : 'password'"
@@ -54,7 +56,7 @@
                 class="w-7 h-7 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 text-[18px]"
                 v-model="showPassword"
               />
-              <p class="ml-[15px]">Show</p>
+              <p class="ml-[15px] bg-[#FFFF]">Show</p>
             </div>
           </div>
 
@@ -64,7 +66,9 @@
             Login
           </button>
         </form>
-        <router-link to="/register" class="text-blue-700">register</router-link>
+        <router-link to="/register" class="text-blue-700 bg-[#FFFF]"
+          >register</router-link
+        >
       </div>
     </div>
   </div>
@@ -98,6 +102,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .reg-bg {
+  background-color: white;
   padding-top: 100px;
 }
 

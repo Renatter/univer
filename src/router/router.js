@@ -10,6 +10,7 @@ import Hostel from "../views/Hostel.vue"
 import Payment from "../views/Payment.vue"
 import Search from "../views/Search.vue"
 import Rules from "../views/Rules.vue"
+import HostelInfo from "../views/HostelInfo.vue"
 const router = createRouter({
 
     history: createWebHistory(),
@@ -53,8 +54,14 @@ const router = createRouter({
             path: '/Rules',
             name: 'Rules',
             component: Rules,
-        }
+        },
 
+        {
+            path: '/HostelInfo/:Hid',
+            name: 'HostelInfo',
+            component: HostelInfo,
+            props: true
+        },
 
 
     ]

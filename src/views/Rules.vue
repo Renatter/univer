@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#F4F4F7] w-full ml-[25px] rounded-[15px] p-[25px] h-[800px]">
+  <div class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-[800px]">
     Rules
   </div>
 </template>

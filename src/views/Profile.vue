@@ -1,24 +1,29 @@
 <template>
-  <div class="bg-[#F4F4F7] w-full ml-[25px] rounded-[15px] p-[25px] h-[800px]">
+  <div
+    class="bg-[#F4F4F7] w-full ml-[25px] rounded-[15px] p-[25px] h-[800px] bg-[#FFFF]"
+  >
     <div
       v-if="currentUser && currentUser.email"
-      class="profile-info flex items-stretch pt-[50px]"
+      class="profile-info flex items-stretch pt-[50px] bg-[#FFFF]"
     >
       <div class="profil_text ml-[30px]">
         <div class="name flex">
-          <div>
-            <div v-if="isEditing" class="items-center justify-center w-full">
+          <div class="bg-[#FFFF]">
+            <div
+              v-if="isEditing"
+              class="items-center justify-center w-full bg-[#FFFF]"
+            >
               <label
                 @click="showBtn = true"
                 for="dropzone-file"
-                class="flex flex-col items-center justify-center w-[150px] h-[150px] border-2 border-[#22c55e] border-dashed rounded-full cursor-pointer bg-[#f2faf5]"
+                class="bg-[#FFFF] flex flex-col items-center justify-center w-[150px] h-[150px] border-2 border-[#22c55e] border-dashed rounded-full cursor-pointer bg-[#f2faf5]"
               >
                 <div
-                  class="flex flex-col items-center justify-center pt-5 pb-6"
+                  class="bg-[#FFFF] flex flex-col items-center justify-center pt-5 pb-6"
                 >
                   <svg
                     aria-hidden="true"
-                    class="w-10 h-10 mb-3 text-gray-400"
+                    class="w-10 h-10 mb-3 text-gray-400 bg-[#FFFF]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -32,10 +37,12 @@
                     ></path>
                   </svg>
                   <p
-                    class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center"
+                    class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center bg-[#FFFF]"
                   >
-                    <span class="font-semibold">Click to upload</span> or drag
-                    and drop
+                    <span class="font-semibold bg-[#FFFF]"
+                      >Click to upload</span
+                    >
+                    or drag and drop
                   </p>
                 </div>
                 <input
@@ -52,19 +59,21 @@
               >
                 Добавить фото
               </button>
-              <p v-if="textImg" class="text-[#4ade80]">Нажмите Save</p>
+              <p v-if="textImg" class="text-[#4ade80]bg-[#FFFF]">
+                Нажмите Save
+              </p>
             </div>
             <div v-else>
               <div v-if="!imageUrl">
                 <img
-                  class="w-[150px] rounded-full max-h-[150px]"
+                  class="w-[150px] rounded-full max-h-[150px] bg-[#FFFF]"
                   :src="gray"
                   alt="Нет фотографии"
                 />
               </div>
-              <div v-else>
+              <div v-else class="bg-[#FFFF]">
                 <img
-                  class="w-[150px] rounded-full max-h-[150px]"
+                  class="w-[150px] rounded-full max-h-[150px] bg-[#FFFF]"
                   :src="imageUrl"
                   alt="Нет фотографии"
                 />
@@ -72,8 +81,8 @@
             </div>
           </div>
 
-          <div class="name pl-[30px]">
-            <div v-if="isEditing" class="flex">
+          <div class="name pl-[30px] bg-[#FFFF]">
+            <div v-if="isEditing" class="flex bg-[#FFFF]">
               <input
                 v-model="firstName"
                 type="text"
@@ -85,20 +94,28 @@
                 class="ml-[15px] bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500"
               />
             </div>
-            <div v-else class="flex">
-              <p class="text-[32px] font-bold">{{ firstName }}</p>
-              <p class="text-[32px] font-bold ml-[30px]">{{ lastName }}</p>
+            <div v-else class="flex bg-[#FFFF]">
+              <p class="text-[32px] font-bold bg-[#FFFF]">{{ firstName }}</p>
+              <p class="text-[32px] font-bold ml-[30px] bg-[#FFFF]">
+                {{ lastName }}
+              </p>
             </div>
 
             <hr />
-            <div class="user_info flex">
-              <div class="info_list">
-                <p class="text-[#94a3b8] pt-[34px]">Пол</p>
-                <p class="text-[#94a3b8] pt-[46px]">Дата регистрации</p>
-                <p class="text-[#94a3b8] pt-[34px]">Номер телефона</p>
-                <p class="text-[#94a3b8] pt-[34px]">Эл. почта</p>
-                <p class="text-[#94a3b8] pt-[34px]">Корпус</p>
-                <p class="text-[#94a3b8] pt-[50px] mb-[25px]">Группа</p>
+            <div class="user_info flex bg-[#FFFF]">
+              <div class="info_list bg-[#FFFF]">
+                <p class="text-[#94a3b8] pt-[34px] bg-[#FFFF]">Пол</p>
+                <p class="text-[#94a3b8] pt-[46px] bg-[#FFFF]">
+                  Дата регистрации
+                </p>
+                <p class="text-[#94a3b8] pt-[34px] bg-[#FFFF]">
+                  Номер телефона
+                </p>
+                <p class="text-[#94a3b8] pt-[34px] bg-[#FFFF]">Эл. почта</p>
+                <p class="text-[#94a3b8] pt-[34px] bg-[#FFFF]">Корпус</p>
+                <p class="text-[#94a3b8] pt-[50px] bg-[#FFFF] mb-[25px]">
+                  Группа
+                </p>
                 <button
                   v-if="!isEditing"
                   @click="swithRed"
@@ -107,7 +124,7 @@
                 >
                   Редактировать
                 </button>
-                <div v-else>
+                <div v-else class="bg-[#FFFF]">
                   <button
                     @click="saveAccount"
                     type="button"
@@ -117,32 +134,32 @@
                   </button>
                 </div>
               </div>
-              <div class="info_list ml-[35px]">
+              <div class="info_list ml-[35px] bg-[#FFFF]">
                 <div>
                   <div v-if="isEditing">
-                    <div class="Pol pt-[25px]">
+                    <div class="Pol pt-[25px] bg-[#FFFF]">
                       <ul
-                        class="items-center w-[200px] text-sm font-semibold text-gray-900 bg-white sm:flex"
+                        class="items-center w-[200px] text-sm font-semibold text-gray-900 bg-white sm:flex bg-[#FFFF]"
                       >
-                        <li class="w-full sm:border-b-0">
-                          <div class="flex items-center pl-3">
+                        <li class="w-full sm:border-b-0 bg-[#FFFF]">
+                          <div class="flex items-center pl-3 bg-[#FFFF]">
                             <input
                               v-model="pol"
                               id="horizontal-list-radio-license"
                               type="radio"
                               value="Муж"
                               name="list-radio"
-                              class="w-4 h-4 text-blue-600 bg-gray-100 focus:ring-blue-500 dark:focus:ring-blue-6002"
+                              class="w-4 h-4 text-blue-600 bg-gray-100 focus:ring-blue-500 dark:focus:ring-blue-6002 bg-[#FFFF]"
                             />
                             <label
                               for="horizontal-list-radio-license"
-                              class="w-full text-[20px] ml-[5px] pt-[5px] font-medium text-gray-900"
+                              class="w-full text-[20px] ml-[5px] pt-[5px] font-medium text-gray-900 bg-[#FFFF]"
                               >Муж
                             </label>
                           </div>
                         </li>
-                        <li class="w-full">
-                          <div class="flex items-center pl-3">
+                        <li class="w-full bg-[#FFFF]">
+                          <div class="flex items-center pl-3 bg-[#FFFF]">
                             <input
                               value="Жен"
                               v-model="pol"
@@ -153,7 +170,7 @@
                             />
                             <label
                               for="horizontal-list-radio-id"
-                              class="w-full text-[20px] ml-[5px] pt-[5px] font-medium text-gray-900 dark:text-gray-300"
+                              class="w-full text-[20px] ml-[5px] pt-[5px] font-medium text-gray-900 dark:text-gray-300 bg-[#FFFF]"
                               >Жен</label
                             >
                           </div>
@@ -161,36 +178,44 @@
                       </ul>
                     </div>
                   </div>
-                  <p v-else class="text-[#000000] pt-[34px] font-bold">
+                  <p
+                    v-else
+                    class="text-[#000000] pt-[34px] font-bold bg-[#FFFF]"
+                  >
                     {{ gender }}
                   </p>
                 </div>
 
-                <p class="text-[#b3b3b3] pt-[44px] font-bold">
+                <p class="text-[#b3b3b3] pt-[44px] font-bold bg-[#FFFF]">
                   {{ currentUser.metadata.creationTime }}
                 </p>
                 <div>
-                  <div class="pt-[30px]" v-if="isEditing">
+                  <div class="pt-[30px] bg-[#FFFF]" v-if="isEditing">
                     <input
                       v-model="phone"
                       type="text"
                       class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500"
                     />
                   </div>
-                  <p v-else class="text-[#000000] pt-[44px] font-bold">
+                  <p
+                    v-else
+                    class="text-[#000000] pt-[44px] font-bold bg-[#FFFF]"
+                  >
                     {{ phone }}
                   </p>
                 </div>
-                <p class="text-[#b3b3b3] pt-[24px] font-bold">
+                <p class="text-[#b3b3b3] pt-[24px] font-bold bg-[#FFFF]">
                   {{ currentUser.email }}
                 </p>
                 <div>
                   <div v-if="isEditing">
-                    <div class="choice_group flex mb-[15px] pt-[35px]">
+                    <div
+                      class="choice_group flex mb-[15px] pt-[35px] bg-[#FFFF]"
+                    >
                       <div>
                         <select
                           id="letters"
-                          class="h-[40px] bg-green-50 border border-green-500 text-green-900 dark:text-green-400 rounded-lg focus:ring-green-500 focus:border-green-500 block w-[350px] text-[18px]"
+                          class="h-[40px] bg-green-50 border border-green-500 text-green-900 dark:text-green-400 rounded-lg focus:ring-green-500 focus:border-green-500 block w-[350px] text-[18px] bg-[#FFFF]"
                           v-model="selectedLetter"
                         >
                           <option value="Ақпараттық технологиялар">
@@ -208,13 +233,19 @@
                       </div>
                     </div>
                   </div>
-                  <p v-else class="text-[#000000] pt-[44px] font-bold">
+                  <p
+                    v-else
+                    class="text-[#000000] pt-[44px] font-bold bg-[#FFFF]"
+                  >
                     {{ selectedLetter }}
                   </p>
                 </div>
                 <div>
-                  <div v-if="isEditing" class="pl-[260px] pt-[15px] mb-[25px]">
-                    <div class="ml-[10px]" v-if="selectedLetter">
+                  <div
+                    v-if="isEditing"
+                    class="pl-[260px] pt-[15px] mb-[25px] bg-[#FFFF]"
+                  >
+                    <div class="ml-[10px] bg-[#FFFF]" v-if="selectedLetter">
                       <select
                         id="countries"
                         v-model="group"
@@ -233,14 +264,14 @@
                   <div>
                     <p
                       v-if="!isEditing"
-                      class="text-[#000000] mt-[45px] font-bold mb-[25px]"
+                      class="text-[#000000] mt-[45px] font-bold mb-[25px] bg-[#FFFF]"
                     >
                       {{ group }}
                     </p>
                   </div>
                 </div>
 
-                <div>
+                <div class="bg-[#FFFF]">
                   <button
                     v-if="showBtn"
                     @click="deleteAccount"

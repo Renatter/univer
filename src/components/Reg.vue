@@ -1,16 +1,18 @@
 <template>
   <div v-if="loading">Loading...</div>
-  <div v-else class="bg-[#F4F4F7] w-full ml-[25px] rounded-[15px] p-[25px]">
-    <div class="reg-bg">
-      <div v-if="!currentUser">
-        <h1 class="text-4xl font-bold text-center text-blue-500">Register!</h1>
+  <div v-else class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px]">
+    <div class="reg-bg bg-[#FFFF]">
+      <div v-if="!currentUser" class="bg-[#FFFF] z">
+        <h1 class="text-4xl font-bold text-center text-blue-500 bg-[#FFFF]">
+          Register!
+        </h1>
 
-        <form @submit.prevent="register" class="">
-          <div class="flex-box pt-[50px]">
-            <div class="mb-6 mr-[15px]">
+        <form @submit.prevent="register" class="bg-[#FFFF]">
+          <div class="flex-box pt-[50px] bg-[#FFFF]">
+            <div class="mb-6 mr-[15px] bg-[#FFFF]">
               <label
                 for="text"
-                class="block mb-2 text-sm font-semibold text-gray-900 text-[18px]"
+                class="block mb-2 text-sm font-semibold text-gray-900 text-[18px] bg-[#FFFF]"
                 >FirstName</label
               >
               <input
@@ -22,10 +24,10 @@
                 required
               />
             </div>
-            <div class="mb-6 mr-[15px] text-[18px]">
+            <div class="mb-6 mr-[15px] text-[18px] bg-[#FFFF]">
               <label
                 for="text"
-                class="block mb-2 text-sm font-semibold text-gray-900 text-[18px]"
+                class="block mb-2 text-sm font-semibold text-gray-900 text-[18px] bg-[#FFFF]"
                 >LastName</label
               >
               <input
@@ -39,41 +41,41 @@
             </div>
           </div>
 
-          <div class="Pol">
-            <h3 class="font-semibold text-gray-900">Пол</h3>
+          <div class="Pol bg-[#FFFF]">
+            <h3 class="font-semibold text-gray-900 bg-[#FFFF]">Пол</h3>
             <ul
-              class="items-center w-[200px] text-sm font-semibold text-gray-900 bg-white sm:flex"
+              class="items-center w-[200px] text-sm font-semibold text-gray-900 bg-white sm:flex bg-[#FFFF]"
             >
               <li class="w-full sm:border-b-0">
-                <div class="flex items-center pl-3">
+                <div class="flex items-center pl-3 bg-[#FFFF]">
                   <input
                     v-model="pol"
                     id="horizontal-list-radio-license"
                     type="radio"
                     value="Муж"
                     name="list-radio"
-                    class="w-4 h-4 text-blue-600 bg-gray-100 focus:ring-blue-500 dark:focus:ring-blue-6002"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 focus:ring-blue-500 dark:focus:ring-blue-6002 bg-[#FFFF]"
                   />
                   <label
                     for="horizontal-list-radio-license"
-                    class="w-full text-[20px] ml-[5px] pt-[5px] font-medium text-gray-900"
+                    class="w-full text-[20px] ml-[5px] pt-[5px] font-medium text-gray-900 bg-[#FFFF]"
                     >Муж
                   </label>
                 </div>
               </li>
               <li class="w-full">
-                <div class="flex items-center pl-3">
+                <div class="flex items-center pl-3 bg-[#FFFF]">
                   <input
                     value="Жен"
                     v-model="pol"
                     id="horizontal-list-radio-id"
                     type="radio"
                     name="list-radio"
-                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    class="bg-[#FFFF] w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
                   <label
                     for="horizontal-list-radio-id"
-                    class="w-full text-[20px] ml-[5px] pt-[5px] font-medium text-gray-900 dark:text-gray-300"
+                    class="bg-[#FFFF] w-full text-[20px] ml-[5px] pt-[5px] font-medium text-gray-900 dark:text-gray-300"
                     >Жен</label
                   >
                 </div>
@@ -81,11 +83,11 @@
             </ul>
           </div>
 
-          <div class="choice_group flex mb-[15px]">
-            <div>
+          <div class="choice_group flex mb-[15px] bg-[#FFFF]">
+            <div class="bg-[#FFFF]">
               <label
                 for="letters"
-                class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white text-[18px]"
+                class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white text-[18px] bg-[#FFFF]"
                 >Corpus</label
               >
               <select
@@ -104,10 +106,10 @@
                 </option>
               </select>
             </div>
-            <div class="ml-[10px]" v-if="selectedLetter">
+            <div class="ml-[10px] bg-[#FFFF]" v-if="selectedLetter">
               <label
                 for="countries"
-                class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white text-[18px]"
+                class="bg-[#FFFF] block mb-2 text-sm font-semibold text-gray-900 dark:text-white text-[18px]"
                 >Group</label
               >
               <select
@@ -126,23 +128,23 @@
             </div>
           </div>
 
-          <div class="flex-box">
-            <div class="mb-6 mr-[15px]">
+          <div class="flex-box bg-[#FFFF]">
+            <div class="mb-6 mr-[15px] bg-[#FFFF]">
               <label
                 for="text"
-                class="block mb-2 text-sm font-semibold text-gray-900 text-[18px]"
+                class="block mb-2 text-sm font-semibold text-gray-900 text-[18px] bg-[#FFFF]"
                 >Email</label
               >
               <input
                 v-model="email"
                 type="text"
                 id="text"
-                class="h-[40px] bg-gray-50 border border-[#c0c0c0] text-[#0966f3] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-[18px]"
+                class="bg-[#FFFF]h-[40px] bg-gray-50 border border-[#c0c0c0] text-[#0966f3] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-[18px]"
                 placeholder="Email"
                 required
               />
             </div>
-            <div class="mr-[15px]">
+            <div class="mr-[15px] bg-[#FFFF]">
               <input
                 type="text"
                 id="disabled-input"
@@ -154,18 +156,18 @@
             </div>
           </div>
 
-          <div class="mb-6">
+          <div class="mb-6 bg-[#FFFF]">
             <label
               for="password"
-              class="block mb-2 text-sm font-semibold text-gray-900 text-[18px]"
+              class="block mb-2 text-sm font-semibold text-gray-900 text-[18px] bg-[#FFFF]"
               >Your password</label
             >
-            <div class="flex-box items-center">
+            <div class="flex-box items-center bg-[#FFFF]">
               <input
                 v-model="pass"
                 :type="showPassword ? 'text' : 'password'"
                 id="password"
-                class="mr-[15px] h-[40px] bg-gray-50 border border-[#c0c0c0] text-[#0966f3] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[290px] p-2.5 text-[18px]"
+                class="bg-[#FFFF] mr-[15px] h-[40px] bg-gray-50 border border-[#c0c0c0] text-[#0966f3] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[290px] p-2.5 text-[18px]"
                 placeholder="password"
                 required
               />
@@ -175,7 +177,7 @@
                 class="w-7 h-7 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 text-[18px]"
                 v-model="showPassword"
               />
-              <p class="ml-[15px]">Show</p>
+              <p class="ml-[15px] bg-[#FFFF]">Show</p>
             </div>
           </div>
 
@@ -185,7 +187,7 @@
             Register
           </button>
         </form>
-        <router-link to="/Login" class="text-blue-700"
+        <router-link to="/Login" class="text-blue-700 bg-[#FFFF]"
           >У меня есть аккаунт</router-link
         >
       </div>
@@ -290,6 +292,7 @@ export default {
 * {
   font-family: "Forum", cursive;
 }
+
 .flex-box {
   display: flex;
 }

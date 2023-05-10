@@ -2,9 +2,9 @@
   <div class="header bg-blue-700">
     <div class="logo-header bg-blue-700">
       <router-link to="/">
-        <img style="height: 75px" src="../assets/logo.png" alt=""
+        <img style="height: 35px" src="../assets/logo.png" alt=""
       /></router-link>
-      <div class="logo-text bg-blue-700">
+      <div class="logo-text">
         <div class="text-white">ЖАНГИР ХАН УНИВЕРСИТЕТ</div>
         <div class="text-white">Традиция, успех, качество</div>
       </div>
@@ -28,7 +28,7 @@
           />
         </router-link>
       </template>
-      <div v-else>
+      <div v-else class="s">
         <button @click="goToLogin" class="btn mr-[15px]">Войти</button>
         <button @click="goToReg" class="btn">Регистрация</button>
       </div>
@@ -88,17 +88,26 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+.text-white {
+  background-color: #1d4ed8;
+}
 .logo-header {
+  background-color: #1d4ed8;
   align-items: center;
   display: flex;
+}
+.s {
+  background-color: #1d4ed8;
 }
 button {
   font-size: 15px;
 }
 .logo-text {
+  background-color: #1d4ed8;
   margin-left: 20px;
 }
 nav {
+  background-color: #1d4ed8;
   display: flex;
   justify-content: center;
 }

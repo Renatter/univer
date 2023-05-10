@@ -3,37 +3,39 @@
     <Header />
   </div>
 
-  <div class="header">
-    <div class="flex items-start pt-[30px]">
-      <div class="bg-[#F4F4F7] p-[15px] rounded-[15px] h-[800px] relative">
-        <div class="btn flex flex-col justify-between w-[240px]">
-          <router-link
-            v-for="(button, index) in buttons"
-            @click="activateButton(index)"
-            :key="button"
-            :to="button.link"
-            :class="[
-              'text-[#1d4ed8] font-medium rounded-lg text-sm px-5 py-2.5  mb-2',
-              button.isActive
-                ? ' bg-[#1d4fd883] text-[#1d4ed8] hover:bg-[#1d4fd84b] focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
-                : ' bg-white border border-gray-300 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 ',
-            ]"
-          >
-            {{ button.label }}
-          </router-link>
+  <div class="bg-[#F4F4F7] h-full">
+    <div class="header">
+      <div class="flex items-start pt-[30px]">
+        <div class="bg-[#FFFF] p-[15px] rounded-[15px] h-[800px] relative">
+          <div class="btn flex flex-col justify-between w-[240px] bg-[#FFFF]">
+            <router-link
+              v-for="(button, index) in buttons"
+              @click="activateButton(index)"
+              :key="button"
+              :to="button.link"
+              :class="[
+                'text-[#1d4ed8] font-medium rounded-lg text-sm px-5 py-2.5  mb-2',
+                button.isActive
+                  ? ' bg-blue-700 text-[#f8fafc] hover:bg-[#1d4fd84b] focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+                  : ' bg-white border border-gray-300 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 ',
+              ]"
+            >
+              {{ button.label }}
+            </router-link>
 
-          <div
-            v-if="currentUser"
-            @click="signout"
-            class="absolute bottom-[50px] left-[90px] flex items-center cursor-pointer"
-          >
-            <MdExitIcon class="mr-[5px]" w="25px" h="60px" />
-            <button class="text-red-500 font-bold text-[17px]">Выход</button>
+            <div
+              v-if="currentUser"
+              @click="signout"
+              class="absolute bottom-[50px] left-[90px] flex items-center cursor-pointer"
+            >
+              <MdExitIcon class="mr-[5px]" w="25px" h="60px" />
+              <button class="text-red-500 font-bold text-[17px]">Выход</button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <router-view> </router-view>
+        <router-view> </router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -63,8 +65,8 @@ export default {
       hange: false,
       buttons: [
         { label: "Общежитие", isActive: true, link: "/Hostel" },
-        { label: "Поиск мест", isActive: false, link: "/Payment" },
-        { label: "Оплата", isActive: false, link: "/Search" },
+        { label: "Бронировать", isActive: false, link: "/Search" },
+        { label: "Оплата", isActive: false, link: "/Payment" },
         { label: "Правила", isActive: false, link: "/Rules" },
         { label: "Профиль", isActive: false, link: "/Profile" },
       ],
