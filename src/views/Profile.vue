@@ -422,6 +422,7 @@ export default {
       const userDocRef = doc(db, "users", this.currentUser.uid);
       await updateDoc(userDocRef, {
         firstName: this.firstName,
+        lastName: this.lastName,
         gender: this.pol,
         phone: this.phone,
         group: this.group,

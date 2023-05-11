@@ -277,6 +277,9 @@ export default {
         gender: this.pol,
         birth: "null",
         phone: "null",
+        room: "null",
+        floor: "null",
+        dormitory: "null",
 
         // Добавьте другие данные пользователя, которые вы хотите сохранить в базе данных
       });
