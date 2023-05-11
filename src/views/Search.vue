@@ -130,44 +130,54 @@
             </p>
           </div>
 
-          <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div
+            v-if="selectedRoom"
+            class="flex pt-[50px] justify-between w-full"
+          >
             <div>
-              <p  class=" text-[20px] text-blue-700">
-            Комнта {{ selectedRoom.number }} 
-            <p>Свободно
-            {{
-              selectedRoom.capacity === 0 ? "0" : selectedRoom.capacity
-            }}
-            из 3 мест</p>
-            
-          
-          </p>
-          <div   v-if="currentUser"> <button @click="saveAccount">Add</button></div>
-            </div>
-            <div v-if="selectedRoom.capacity<3 && romNumber.number == selectedRoom.number" class="students mr-[55px]">
-  <div v-for="user in users" class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px]">
-    <img class="rounded-full  w-[60px] max-h-[60px] mr-[7px]" :src="user.ImageUrl">
-    <div>
-      <div class="flex">
-        <p>Имя:</p>
-        <p>{{user.Name}}</p>
-      </div>
-      <div class="flex">
-        <p>Фамилия :</p>
-        <p>{{user.fName}}</p>
-      </div>
-      <div class="flex">
-        <p>Корпус :</p>
-        <p>{{user.corpus}}</p>
-      </div>
-      <div class="flex">
-        <p>Группа :</p>
-        <p>{{user.group}}</p>
-      </div>
-    </div>
-  </div>
-</div>
+              <p class="text-[20px] text-blue-700">
+                Комнта {{ selectedRoom.number }}
+              </p>
 
+              <p>
+                Свободно
+                {{ selectedRoom.capacity - users.length }}
+                из 3 мест
+              </p>
+
+              <div v-if="currentUser">
+                <button @click="saveAccount">Add</button>
+              </div>
+            </div>
+            <div class="students mr-[55px]">
+              <div
+                v-for="user in users"
+                class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px]"
+              >
+                <img
+                  class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                  :src="user.ImageUrl"
+                />
+                <div>
+                  <div class="flex">
+                    <p>Имя:</p>
+                    <p>{{ user.Name }}</p>
+                  </div>
+                  <div class="flex">
+                    <p>Фамилия :</p>
+                    <p>{{ user.fName }}</p>
+                  </div>
+                  <div class="flex">
+                    <p>Корпус :</p>
+                    <p>{{ user.corpus }}</p>
+                  </div>
+                  <div class="flex">
+                    <p>Группа :</p>
+                    <p>{{ user.group }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -186,9 +196,52 @@
         >
           <p class="text-center pt-[17px]">{{ item.number }}</p>
         </div>
-        <p v-if="selectedRoom">
-          Room {{ selectedRoom.number }} has {{ selectedRoom.capacity }} beds
-        </p>
+        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div>
+            <p class="text-[20px] text-blue-700">
+              Комнта {{ selectedRoom.number }}
+            </p>
+
+            <p>
+              Свободно
+              {{ selectedRoom.capacity - users.length }}
+              из 3 мест
+            </p>
+
+            <div v-if="currentUser">
+              <button @click="saveAccount">Add</button>
+            </div>
+          </div>
+          <div class="students mr-[55px]">
+            <div
+              v-for="user in users"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px]"
+            >
+              <img
+                class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                :src="user.ImageUrl"
+              />
+              <div>
+                <div class="flex">
+                  <p>Имя:</p>
+                  <p>{{ user.Name }}</p>
+                </div>
+                <div class="flex">
+                  <p>Фамилия :</p>
+                  <p>{{ user.fName }}</p>
+                </div>
+                <div class="flex">
+                  <p>Корпус :</p>
+                  <p>{{ user.corpus }}</p>
+                </div>
+                <div class="flex">
+                  <p>Группа :</p>
+                  <p>{{ user.group }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div v-if="floorTab === 3 && activeTab === 1">
@@ -205,9 +258,52 @@
         >
           <p class="text-center pt-[17px]">{{ item.number }}</p>
         </div>
-        <p v-if="selectedRoom">
-          Room {{ selectedRoom.number }} has {{ selectedRoom.capacity }} beds
-        </p>
+        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div>
+            <p class="text-[20px] text-blue-700">
+              Комнта {{ selectedRoom.number }}
+            </p>
+
+            <p>
+              Свободно
+              {{ selectedRoom.capacity - users.length }}
+              из 3 мест
+            </p>
+
+            <div v-if="currentUser">
+              <button @click="saveAccount">Add</button>
+            </div>
+          </div>
+          <div class="students mr-[55px]">
+            <div
+              v-for="user in users"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px]"
+            >
+              <img
+                class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                :src="user.ImageUrl"
+              />
+              <div>
+                <div class="flex">
+                  <p>Имя:</p>
+                  <p>{{ user.Name }}</p>
+                </div>
+                <div class="flex">
+                  <p>Фамилия :</p>
+                  <p>{{ user.fName }}</p>
+                </div>
+                <div class="flex">
+                  <p>Корпус :</p>
+                  <p>{{ user.corpus }}</p>
+                </div>
+                <div class="flex">
+                  <p>Группа :</p>
+                  <p>{{ user.group }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div v-if="floorTab === 4 && activeTab === 1">
@@ -224,16 +320,68 @@
         >
           <p class="text-center pt-[17px]">{{ item.number }}</p>
         </div>
-        <p v-if="selectedRoom">
-          Room {{ selectedRoom.number }} has {{ selectedRoom.capacity }} beds
-        </p>
+        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div>
+            <p class="text-[20px] text-blue-700">
+              Комнта {{ selectedRoom.number }}
+            </p>
+
+            <p>
+              Свободно
+              {{ selectedRoom.capacity - users.length }}
+              из 3 мест
+            </p>
+
+            <div v-if="currentUser">
+              <button @click="saveAccount">Add</button>
+            </div>
+          </div>
+          <div class="students mr-[55px]">
+            <div
+              v-for="user in users"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px]"
+            >
+              <img
+                class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                :src="user.ImageUrl"
+              />
+              <div>
+                <div class="flex">
+                  <p>Имя:</p>
+                  <p>{{ user.Name }}</p>
+                </div>
+                <div class="flex">
+                  <p>Фамилия :</p>
+                  <p>{{ user.fName }}</p>
+                </div>
+                <div class="flex">
+                  <p>Корпус :</p>
+                  <p>{{ user.corpus }}</p>
+                </div>
+                <div class="flex">
+                  <p>Группа :</p>
+                  <p>{{ user.group }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { collection, doc, getDoc, getDocs, query, where,onSnapshot,updateDoc  } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -251,10 +399,10 @@ export default {
       rooms2: [],
       rooms3: [],
       rooms4: [],
-      comanta:null,
+      comanta: null,
       selectedRoom: null,
-      romNumber:0,
-      
+      romNumber: 0,
+
       users: [],
       currentUser: null,
     };
@@ -268,19 +416,43 @@ export default {
     },
     showCapacity(room) {
       this.selectedRoom = room;
-      this.romNumber = this.selectedRoom
+      this.romNumber = this.selectedRoom.number;
+
+      const us = collection(db, "users");
+
+      const q = query(
+        us,
+        where("room", "==", room.number),
+        where("dormitory", "==", 1),
+        where("floor", "==", this.floorTab)
+      );
+
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const users = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const user = {
+            Name: data.lastName,
+            ImageUrl: data.imageUrl,
+            fName: data.firstName,
+            corpus: data.corpus,
+            group: data.group,
+          };
+          users.push(user);
+        });
+        this.users = users;
+      });
     },
     async saveAccount() {
       const userDocRef = doc(db, "users", this.currentUser.uid);
       await updateDoc(userDocRef, {
-      room: this.selectedRoom.number,
-       dormitory: this.activeTab,
-       floor:this.floorTab
+        room: this.selectedRoom.number,
+        dormitory: this.activeTab,
+        floor: this.floorTab,
       });
-     
     },
   },
- 
+
   async mounted() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -289,7 +461,6 @@ export default {
         this.currentUser = null;
       }
     });
-
 
     const r1 = doc(db, "rooms", "azUEd0dd0ze5FV8fOLNW");
     const r2 = doc(db, "rooms", "4gr2hjUJKHQeG7AHlIWD");
@@ -300,40 +471,11 @@ export default {
     const docSnap3 = await getDoc(r3);
     const docSnap4 = await getDoc(r4);
 
-    
-    const us = collection(db, "users");
-// define variables for the filters
-
-
-const q = query(
-  us,
-  where("room", "==",2),
-  where("dormitory", "==", 1),
-  where("floor", "==", 1),
-);
-
-const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  const users = [];
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
-    const user = {
-      Name: data.lastName,
-      ImageUrl: data.imageUrl,
-      fName: data.firstName,
-      corpus: data.corpus,
-      group: data.group,
-    };
-    users.push(user);
-  });
-  this.users = users;
-});
-
-
+    // define variables for the filters
 
     if (docSnap.exists()) {
       // console.log("Document data:", docSnap.data());
       this.rooms1 = docSnap.data().rooms;
-      console.log(docSnap.data())
     }
 
     if (docSnap2.exists()) {
