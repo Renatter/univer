@@ -116,6 +116,9 @@
                 <p class="text-[#94a3b8] pt-[50px] bg-[#FFFF] mb-[25px]">
                   Группа
                 </p>
+                <p class="text-[#94a3b8] pt-[50px] bg-[#FFFF] mb-[25px]">
+                  Комната
+                </p>
                 <button
                   v-if="!isEditing"
                   @click="swithRed"
@@ -269,21 +272,22 @@
                       {{ group }}
                     </p>
                   </div>
-                </div>
-
-                <div class="bg-[#FFFF]">
-                  <button
-                    v-if="showBtn"
-                    @click="deleteAccount"
-                    type="button"
-                    class="pt-[11px] focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  <p
+                    class="text-[#b3b3b3] pt-[44px] font-bold bg-[#FFFF] mb-[32px]"
                   >
-                    Удалить аккаунт
-                  </button>
-                  <p v-else class="text-red-700">
-                    чтобы удалить учетную запись, добавьте фотографию или
-                    войдите в систему снова
+                    Общежитие: {{ dormitory }} Этаж {{ floor }} Комната:
+                    {{ room }}
                   </p>
+                </div>
+                <div>
+                  <router-link
+                    to="/Search"
+                    v-if="payment"
+                    @click="closePay"
+                    class="pt-[11px] mt-[50px] focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  >
+                    Отменить оплату
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -300,7 +304,14 @@ import InputComp from "../components/InputComp.vue";
 import { storage, db, auth } from "../firebase/index";
 
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, deleteDoc, updateDoc, getDoc } from "firebase/firestore";
+import {
+  doc,
+  deleteDoc,
+  updateDoc,
+  getDoc,
+  query,
+  where,
+} from "firebase/firestore";
 import {
   ref,
   uploadBytes,
@@ -314,9 +325,12 @@ export default {
   },
   data() {
     return {
+      dormitory: null,
+      floor: null,
+      room: null,
       showBtn: false,
       loginCount: 0,
-
+      payment: false,
       gray: "https://ob-kassa.ru/content/front/buhoskol_tmp1/images/reviews-icon.jpg",
       visitedDeletePage: false,
       currentUser: null,
@@ -388,6 +402,15 @@ export default {
   },
 
   methods: {
+    async closePay() {
+      const userDocRef = doc(db, "users", this.currentUser.uid);
+      await updateDoc(userDocRef, {
+        payment: false,
+        dormitory: null,
+        floor: null,
+        room: null,
+      });
+    },
     swithRed() {
       (this.textImg = false), (this.isEditing = true);
     },
@@ -466,7 +489,10 @@ export default {
           this.group = userDoc.data().group;
           this.selectedLetter = userDoc.data().corpus;
           this.gender = userDoc.data().gender;
-
+          this.payment = userDoc.data().payment;
+          this.dormitory = userDoc.data().dormitory;
+          this.floor = userDoc.data().floor;
+          this.room = userDoc.data().room;
           this.phone = userDoc.data().phone;
           this.imageUrl = userDoc.data().profilePictureUrl || "";
         } else {

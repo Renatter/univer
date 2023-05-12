@@ -34,6 +34,7 @@ const router = createRouter({
             path: '/Profile',
             name: 'Profile',
             component: Profile,
+
         },
         {
             path: '/Hostel',
@@ -41,9 +42,10 @@ const router = createRouter({
             component: Hostel,
         },
         {
-            path: '/Payment',
+            path: '/Payment/:id',
             name: 'Payment',
             component: Payment,
+            props: true
         },
         {
             path: '/Search',

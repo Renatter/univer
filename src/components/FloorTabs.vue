@@ -1,0 +1,76 @@
+<template>
+  <div>
+    <ul
+      class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400"
+    >
+      <a
+        href="#"
+        :class="[
+          'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
+          floorTab === 1
+            ? 'text-[#1e40af] bg-[#94a3b8] active'
+            : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
+        ]"
+        @click="floactiveTab(1)"
+        aria-current="page"
+        >1 этаж</a
+      >
+
+      <a
+        href="#"
+        :class="[
+          'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
+          floorTab === 2
+            ? 'text-[#1e40af] bg-[#94a3b8] active'
+            : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
+        ]"
+        @click="floactiveTab(2)"
+        aria-current="page"
+        >2 этаж</a
+      >
+      <a
+        href="#"
+        :class="[
+          'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
+          floorTab === 3
+            ? 'text-[#1e40af] bg-[#94a3b8] active'
+            : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
+        ]"
+        @click="floactiveTab(3)"
+        aria-current="page"
+        >3 этаж</a
+      >
+
+      <a
+        href="#"
+        :class="[
+          'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
+          floorTab === 4
+            ? 'text-[#1e40af] bg-[#94a3b8] active'
+            : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
+        ]"
+        @click="floactiveTab(4)"
+        aria-current="page"
+        >4 этаж</a
+      >
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      floorTab: 1,
+    };
+  },
+  methods: {
+    floactiveTab(tabNumber) {
+      this.floorTab = tabNumber;
+      this.$emit("tab-x", this.floorTab);
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped></style>

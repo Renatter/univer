@@ -1,221 +1,53 @@
 <template>
   <div class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-[800px]">
-    <ul
-      class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400 ml-[200px]"
-    >
-      <li class="mr-2">
-        <a
-          href="#"
-          :class="[
-            'inline-block px-4 py-3 rounded-lg',
-            activeTab === 1
-              ? 'text-white bg-blue-600 active'
-              : 'focus:outline-none dark:bg-gray-700 dark:text-white',
-          ]"
-          @click="setActiveTab(1)"
-          aria-current="page"
-          >Общежитие №1</a
-        >
-      </li>
-      <li class="mr-2">
-        <a
-          href="#"
-          :class="[
-            'inline-block px-4 py-3 rounded-lg',
-            activeTab === 2
-              ? 'text-white bg-blue-600 active'
-              : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
-          ]"
-          @click="setActiveTab(2)"
-          aria-current="page"
-          >Общежитие №2</a
-        >
-      </li>
-      <li class="mr-2">
-        <a
-          href="#"
-          :class="[
-            'inline-block px-4 py-3 rounded-lg',
-            activeTab === 3
-              ? 'text-white bg-blue-600 active'
-              : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
-          ]"
-          @click="setActiveTab(3)"
-          aria-current="page"
-          >Общежитие №3</a
-        >
-      </li>
-    </ul>
     <div class="text-center">
+      <Tabs @tab-changed="handleTabChanged" />
       <div v-if="activeTab === 1" class="pt-[55px]">
-        <ul
-          class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400"
-        >
-          <a
-            href="#"
-            :class="[
-              'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
-              floorTab === 1
-                ? 'text-[#1e40af] bg-[#94a3b8] active'
-                : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
-            ]"
-            @click="floactiveTab(1)"
-            aria-current="page"
-            >1 этаж</a
-          >
-
-          <a
-            href="#"
-            :class="[
-              'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
-              floorTab === 2
-                ? 'text-[#1e40af] bg-[#94a3b8] active'
-                : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
-            ]"
-            @click="floactiveTab(2)"
-            aria-current="page"
-            >2 этаж</a
-          >
-          <a
-            href="#"
-            :class="[
-              'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
-              floorTab === 3
-                ? 'text-[#1e40af] bg-[#94a3b8] active'
-                : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
-            ]"
-            @click="floactiveTab(3)"
-            aria-current="page"
-            >3 этаж</a
-          >
-
-          <a
-            href="#"
-            :class="[
-              'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
-              floorTab === 4
-                ? 'text-[#1e40af] bg-[#94a3b8] active'
-                : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
-            ]"
-            @click="floactiveTab(4)"
-            aria-current="page"
-            >4 этаж</a
-          >
-        </ul>
+        <FloorTabs @tab-x="floorChanged" />
       </div>
-      <div v-if="activeTab === 2">
-        <div>
-          <h1>All Users</h1>
-          <div v-for="(user, index) in users" :key="index">
-            <p>{{ user.Name }}</p>
-            <img :src="user.ImageUrl" />
-          </div>
-        </div>
+      <div v-if="activeTab === 2" class="pt-[55px]">
+        <FloorTabs @tab-x="floorChanged" />
       </div>
-      <div v-if="activeTab === 3">Контент для третьей вкладки</div>
+      <div v-if="activeTab === 3" class="pt-[55px]">
+        <FloorTabs @tab-x="floorChanged" />
+      </div>
     </div>
     <div class="pt-[50px]">
       <div v-if="floorTab === 1 && activeTab === 1">
         <div
           class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
         >
-          <div
+          <Choosie
+            @show-capacity="capacityChanged"
             v-for="item in rooms1"
-            class="m-[20px] rounded-[10px] border w-[60px] h-[60px] hover:bg-blue-600 hover:text-white cursor-pointer"
-            :class="{ 'bg-blue-600 text-white': item === selectedRoom }"
-            @click="showCapacity(item)"
-          >
-            <p class="text-center pt-[17px]">
-              {{ item.number }}
+            :item="item"
+            :selectedRoom="selectedRoom"
+          />
+        </div>
+
+        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div>
+            <p class="text-[20px] text-blue-700">
+              Комната{{ selectedRoom.number }}
             </p>
-          </div>
 
-          <div
-            v-if="selectedRoom"
-            class="flex pt-[50px] justify-between w-full"
-          >
-            <div>
-              <p class="text-[20px] text-blue-700">
-                Комнта {{ selectedRoom.number }}
-              </p>
+            <p>Занято {{ users.length }}из 3 мест</p>
 
-              <p>
-                Свободно
-                {{ selectedRoom.capacity - users.length }}
-                из 3 мест
-              </p>
-
-              <div v-if="currentUser">
-                <button @click="saveAccount">Add</button>
-              </div>
-            </div>
-            <div class="students mr-[55px]">
-              <div
-                v-for="user in users"
-                class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px]"
+            <div class="pt-[15px]">
+              <router-link
+                @click="saveAccount"
+                :to="{ path: '/Payment/' + selectedRoom.number }"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                <img
-                  class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
-                  :src="user.ImageUrl"
-                />
-                <div>
-                  <div class="flex">
-                    <p>Имя:</p>
-                    <p>{{ user.Name }}</p>
-                  </div>
-                  <div class="flex">
-                    <p>Фамилия :</p>
-                    <p>{{ user.fName }}</p>
-                  </div>
-                  <div class="flex">
-                    <p>Корпус :</p>
-                    <p>{{ user.corpus }}</p>
-                  </div>
-                  <div class="flex">
-                    <p>Группа :</p>
-                    <p>{{ user.group }}</p>
-                  </div>
-                </div>
-              </div>
+                Pay</router-link
+              >
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div v-if="floorTab === 2 && activeTab === 1">
-      <div
-        class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
-      >
-        <div
-          v-for="item in rooms2"
-          :class="{
-            active1: selectedRoom && selectedRoom.number === item.number,
-          }"
-          class="m-[20px] rounded-[10px] border w-[60px] h-[60px] hover:bg-blue-600 hover:text-white cursor-pointer"
-          @click="showCapacity(item)"
-        >
-          <p class="text-center pt-[17px]">{{ item.number }}</p>
-        </div>
-        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
-          <div>
-            <p class="text-[20px] text-blue-700">
-              Комнта {{ selectedRoom.number }}
-            </p>
 
-            <p>
-              Свободно
-              {{ selectedRoom.capacity - users.length }}
-              из 3 мест
-            </p>
-
-            <div v-if="currentUser">
-              <button @click="saveAccount">Add</button>
-            </div>
-          </div>
-          <div class="students mr-[55px]">
+          <div class="students">
             <div
               v-for="user in users"
-              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px]"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
             >
               <img
                 class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
@@ -224,11 +56,11 @@
               <div>
                 <div class="flex">
                   <p>Имя:</p>
-                  <p>{{ user.Name }}</p>
+                  <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
                   <p>Фамилия :</p>
-                  <p>{{ user.fName }}</p>
+                  <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
                   <p>Корпус :</p>
@@ -243,41 +75,39 @@
           </div>
         </div>
       </div>
-    </div>
-    <div v-if="floorTab === 3 && activeTab === 1">
-      <div
-        class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
-      >
+      <div v-if="floorTab === 2 && activeTab === 1">
         <div
-          v-for="item in rooms3"
-          :class="{
-            active1: selectedRoom && selectedRoom.number === item.number,
-          }"
-          class="m-[20px] rounded-[10px] border w-[60px] h-[60px] hover:bg-blue-600 hover:text-white cursor-pointer"
-          @click="showCapacity(item)"
+          class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
         >
-          <p class="text-center pt-[17px]">{{ item.number }}</p>
+          <Choosie
+            @show-capacity="capacityChanged"
+            v-for="item in rooms2"
+            :item="item"
+            :selectedRoom="selectedRoom"
+          />
         </div>
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комнта {{ selectedRoom.number }}
+              Комната{{ selectedRoom.number }}
             </p>
 
-            <p>
-              Свободно
-              {{ selectedRoom.capacity - users.length }}
-              из 3 мест
-            </p>
+            <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div v-if="currentUser">
-              <button @click="saveAccount">Add</button>
+            <div class="pt-[15px]">
+              <router-link
+                @click="saveAccount"
+                :to="{ path: '/Payment/' + selectedRoom.number }"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Pay</router-link
+              >
             </div>
           </div>
-          <div class="students mr-[55px]">
+          <div class="students">
             <div
               v-for="user in users"
-              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px]"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
             >
               <img
                 class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
@@ -286,11 +116,11 @@
               <div>
                 <div class="flex">
                   <p>Имя:</p>
-                  <p>{{ user.Name }}</p>
+                  <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
                   <p>Фамилия :</p>
-                  <p>{{ user.fName }}</p>
+                  <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
                   <p>Корпус :</p>
@@ -305,41 +135,39 @@
           </div>
         </div>
       </div>
-    </div>
-    <div v-if="floorTab === 4 && activeTab === 1">
-      <div
-        class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
-      >
+      <div v-if="floorTab === 3 && activeTab === 1">
         <div
-          v-for="item in rooms4"
-          :class="{
-            active1: selectedRoom && selectedRoom.number === item.number,
-          }"
-          class="m-[20px] rounded-[10px] border w-[60px] h-[60px] hover:bg-blue-600 hover:text-white cursor-pointer"
-          @click="showCapacity(item)"
+          class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
         >
-          <p class="text-center pt-[17px]">{{ item.number }}</p>
+          <Choosie
+            @show-capacity="capacityChanged"
+            v-for="item in rooms3"
+            :item="item"
+            :selectedRoom="selectedRoom"
+          />
         </div>
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комнта {{ selectedRoom.number }}
+              Комната{{ selectedRoom.number }}
             </p>
 
-            <p>
-              Свободно
-              {{ selectedRoom.capacity - users.length }}
-              из 3 мест
-            </p>
+            <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div v-if="currentUser">
-              <button @click="saveAccount">Add</button>
+            <div class="pt-[15px]">
+              <router-link
+                @click="saveAccount"
+                :to="{ path: '/Payment/' + selectedRoom.number }"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Pay</router-link
+              >
             </div>
           </div>
-          <div class="students mr-[55px]">
+          <div class="students">
             <div
               v-for="user in users"
-              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px]"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
             >
               <img
                 class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
@@ -348,11 +176,555 @@
               <div>
                 <div class="flex">
                   <p>Имя:</p>
-                  <p>{{ user.Name }}</p>
+                  <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
                   <p>Фамилия :</p>
+                  <p>{{ user.Name }}</p>
+                </div>
+                <div class="flex">
+                  <p>Корпус :</p>
+                  <p>{{ user.corpus }}</p>
+                </div>
+                <div class="flex">
+                  <p>Группа :</p>
+                  <p>{{ user.group }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="floorTab === 4 && activeTab === 1">
+        <div
+          class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
+        >
+          <Choosie
+            @show-capacity="capacityChanged"
+            v-for="item in rooms4"
+            :item="item"
+            :selectedRoom="selectedRoom"
+          />
+        </div>
+        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div>
+            <p class="text-[20px] text-blue-700">
+              Комната{{ selectedRoom.number }}
+            </p>
+
+            <p>Занято {{ users.length }}из 3 мест</p>
+
+            <div class="pt-[15px]">
+              <router-link
+                @click="saveAccount"
+                :to="{ path: '/Payment/' + selectedRoom.number }"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Pay</router-link
+              >
+            </div>
+          </div>
+          <div class="students">
+            <div
+              v-for="user in users"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
+            >
+              <img
+                class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                :src="user.ImageUrl"
+              />
+              <div>
+                <div class="flex">
+                  <p>Имя:</p>
                   <p>{{ user.fName }}</p>
+                </div>
+                <div class="flex">
+                  <p>Фамилия :</p>
+                  <p>{{ user.Name }}</p>
+                </div>
+                <div class="flex">
+                  <p>Корпус :</p>
+                  <p>{{ user.corpus }}</p>
+                </div>
+                <div class="flex">
+                  <p>Группа :</p>
+                  <p>{{ user.group }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="floorTab === 1 && activeTab === 2">
+        <div
+          class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
+        >
+          <Choosie
+            @show-capacity="capacityChanged"
+            v-for="item in rooms5"
+            :item="item"
+            :selectedRoom="selectedRoom"
+          />
+        </div>
+
+        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div>
+            <p class="text-[20px] text-blue-700">
+              Комната{{ selectedRoom.number }}
+            </p>
+
+            <p>Занято {{ users.length }}из 3 мест</p>
+
+            <div class="pt-[15px]">
+              <router-link
+                @click="saveAccount"
+                :to="{ path: '/Payment/' + selectedRoom.number }"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Pay</router-link
+              >
+            </div>
+          </div>
+
+          <div class="students">
+            <div
+              v-for="user in users"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
+            >
+              <img
+                class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                :src="user.ImageUrl"
+              />
+              <div>
+                <div class="flex">
+                  <p>Имя:</p>
+                  <p>{{ user.fName }}</p>
+                </div>
+                <div class="flex">
+                  <p>Фамилия :</p>
+                  <p>{{ user.Name }}</p>
+                </div>
+                <div class="flex">
+                  <p>Корпус :</p>
+                  <p>{{ user.corpus }}</p>
+                </div>
+                <div class="flex">
+                  <p>Группа :</p>
+                  <p>{{ user.group }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="floorTab === 2 && activeTab === 2">
+        <div
+          class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
+        >
+          <Choosie
+            @show-capacity="capacityChanged"
+            v-for="item in rooms6"
+            :item="item"
+            :selectedRoom="selectedRoom"
+          />
+        </div>
+        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div>
+            <p class="text-[20px] text-blue-700">
+              Комната{{ selectedRoom.number }}
+            </p>
+
+            <p>Занято {{ users.length }}из 3 мест</p>
+
+            <div class="pt-[15px]">
+              <router-link
+                @click="saveAccount"
+                :to="{ path: '/Payment/' + selectedRoom.number }"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Pay</router-link
+              >
+            </div>
+          </div>
+          <div class="students">
+            <div
+              v-for="user in users"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
+            >
+              <img
+                class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                :src="user.ImageUrl"
+              />
+              <div>
+                <div class="flex">
+                  <p>Имя:</p>
+                  <p>{{ user.fName }}</p>
+                </div>
+                <div class="flex">
+                  <p>Фамилия :</p>
+                  <p>{{ user.Name }}</p>
+                </div>
+                <div class="flex">
+                  <p>Корпус :</p>
+                  <p>{{ user.corpus }}</p>
+                </div>
+                <div class="flex">
+                  <p>Группа :</p>
+                  <p>{{ user.group }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="floorTab === 3 && activeTab === 2">
+        <div
+          class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
+        >
+          <Choosie
+            @show-capacity="capacityChanged"
+            v-for="item in rooms7"
+            :item="item"
+            :selectedRoom="selectedRoom"
+          />
+        </div>
+        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div>
+            <p class="text-[20px] text-blue-700">
+              Комната{{ selectedRoom.number }}
+            </p>
+
+            <p>Занято {{ users.length }}из 3 мест</p>
+
+            <div class="pt-[15px]">
+              <router-link
+                @click="saveAccount"
+                :to="{ path: '/Payment/' + selectedRoom.number }"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Pay</router-link
+              >
+            </div>
+          </div>
+          <div class="students">
+            <div
+              v-for="user in users"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
+            >
+              <img
+                class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                :src="user.ImageUrl"
+              />
+              <div>
+                <div class="flex">
+                  <p>Имя:</p>
+                  <p>{{ user.fName }}</p>
+                </div>
+                <div class="flex">
+                  <p>Фамилия :</p>
+                  <p>{{ user.Name }}</p>
+                </div>
+                <div class="flex">
+                  <p>Корпус :</p>
+                  <p>{{ user.corpus }}</p>
+                </div>
+                <div class="flex">
+                  <p>Группа :</p>
+                  <p>{{ user.group }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="floorTab === 4 && activeTab === 2">
+        <div
+          class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
+        >
+          <Choosie
+            @show-capacity="capacityChanged"
+            v-for="item in rooms8"
+            :item="item"
+            :selectedRoom="selectedRoom"
+          />
+        </div>
+        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div>
+            <p class="text-[20px] text-blue-700">
+              Комната{{ selectedRoom.number }}
+            </p>
+
+            <p>Занято {{ users.length }}из 3 мест</p>
+
+            <div class="pt-[15px]">
+              <router-link
+                @click="saveAccount"
+                :to="{ path: '/Payment/' + selectedRoom.number }"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Pay</router-link
+              >
+            </div>
+          </div>
+          <div class="students">
+            <div
+              v-for="user in users"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
+            >
+              <img
+                class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                :src="user.ImageUrl"
+              />
+              <div>
+                <div class="flex">
+                  <p>Имя:</p>
+                  <p>{{ user.fName }}</p>
+                </div>
+                <div class="flex">
+                  <p>Фамилия :</p>
+                  <p>{{ user.Name }}</p>
+                </div>
+                <div class="flex">
+                  <p>Корпус :</p>
+                  <p>{{ user.corpus }}</p>
+                </div>
+                <div class="flex">
+                  <p>Группа :</p>
+                  <p>{{ user.group }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="floorTab === 1 && activeTab === 3">
+        <div
+          class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
+        >
+          <Choosie
+            @show-capacity="capacityChanged"
+            v-for="item in rooms9"
+            :item="item"
+            :selectedRoom="selectedRoom"
+          />
+        </div>
+
+        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div>
+            <p class="text-[20px] text-blue-700">
+              Комната{{ selectedRoom.number }}
+            </p>
+
+            <p>Занято {{ users.length }}из 3 мест</p>
+
+            <div class="pt-[15px]">
+              <router-link
+                @click="saveAccount"
+                :to="{ path: '/Payment/' + selectedRoom.number }"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Pay</router-link
+              >
+            </div>
+          </div>
+
+          <div class="students">
+            <div
+              v-for="user in users"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
+            >
+              <img
+                class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                :src="user.ImageUrl"
+              />
+              <div>
+                <div class="flex">
+                  <p>Имя:</p>
+                  <p>{{ user.fName }}</p>
+                </div>
+                <div class="flex">
+                  <p>Фамилия :</p>
+                  <p>{{ user.Name }}</p>
+                </div>
+                <div class="flex">
+                  <p>Корпус :</p>
+                  <p>{{ user.corpus }}</p>
+                </div>
+                <div class="flex">
+                  <p>Группа :</p>
+                  <p>{{ user.group }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="floorTab === 2 && activeTab === 3">
+        <div
+          class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
+        >
+          <Choosie
+            @show-capacity="capacityChanged"
+            v-for="item in rooms10"
+            :item="item"
+            :selectedRoom="selectedRoom"
+          />
+        </div>
+        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div>
+            <p class="text-[20px] text-blue-700">
+              Комната{{ selectedRoom.number }}
+            </p>
+
+            <p>Занято {{ users.length }}из 3 мест</p>
+
+            <div class="pt-[15px]">
+              <router-link
+                @click="saveAccount"
+                :to="{ path: '/Payment/' + selectedRoom.number }"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Pay</router-link
+              >
+            </div>
+          </div>
+          <div class="students">
+            <div
+              v-for="user in users"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
+            >
+              <img
+                class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                :src="user.ImageUrl"
+              />
+              <div>
+                <div class="flex">
+                  <p>Имя:</p>
+                  <p>{{ user.fName }}</p>
+                </div>
+                <div class="flex">
+                  <p>Фамилия :</p>
+                  <p>{{ user.Name }}</p>
+                </div>
+                <div class="flex">
+                  <p>Корпус :</p>
+                  <p>{{ user.corpus }}</p>
+                </div>
+                <div class="flex">
+                  <p>Группа :</p>
+                  <p>{{ user.group }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="floorTab === 3 && activeTab === 3">
+        <div
+          class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
+        >
+          <Choosie
+            @show-capacity="capacityChanged"
+            v-for="item in rooms11"
+            :item="item"
+            :selectedRoom="selectedRoom"
+          />
+        </div>
+        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div>
+            <p class="text-[20px] text-blue-700">
+              Комната{{ selectedRoom.number }}
+            </p>
+
+            <p>Занято {{ users.length }}из 3 мест</p>
+
+            <div class="pt-[15px]">
+              <router-link
+                @click="saveAccount"
+                :to="{ path: '/Payment/' + selectedRoom.number }"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Pay</router-link
+              >
+            </div>
+          </div>
+          <div class="students">
+            <div
+              v-for="user in users"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
+            >
+              <img
+                class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                :src="user.ImageUrl"
+              />
+              <div>
+                <div class="flex">
+                  <p>Имя:</p>
+                  <p>{{ user.fName }}</p>
+                </div>
+                <div class="flex">
+                  <p>Фамилия :</p>
+                  <p>{{ user.Name }}</p>
+                </div>
+                <div class="flex">
+                  <p>Корпус :</p>
+                  <p>{{ user.corpus }}</p>
+                </div>
+                <div class="flex">
+                  <p>Группа :</p>
+                  <p>{{ user.group }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="floorTab === 4 && activeTab === 3">
+        <div
+          class="rounded-[25px] border-[2px] h-[200px] flex flex-wrap pl-[15px]"
+        >
+          <Choosie
+            @show-capacity="capacityChanged"
+            v-for="item in rooms12"
+            :item="item"
+            :selectedRoom="selectedRoom"
+          />
+        </div>
+        <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
+          <div>
+            <p class="text-[20px] text-blue-700">
+              Комната{{ selectedRoom.number }}
+            </p>
+
+            <p>Занято {{ users.length }}из 3 мест</p>
+
+            <div class="pt-[15px]">
+              <router-link
+                @click="saveAccount"
+                :to="{ path: '/Payment/' + selectedRoom.number }"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Pay</router-link
+              >
+            </div>
+          </div>
+          <div class="students">
+            <div
+              v-for="user in users"
+              class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
+            >
+              <img
+                class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                :src="user.ImageUrl"
+              />
+              <div>
+                <div class="flex">
+                  <p>Имя:</p>
+                  <p>{{ user.fName }}</p>
+                </div>
+                <div class="flex">
+                  <p>Фамилия :</p>
+                  <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
                   <p>Корпус :</p>
@@ -375,12 +747,14 @@
 import {
   collection,
   doc,
+  setDoc,
   getDoc,
   getDocs,
   query,
   where,
   onSnapshot,
   updateDoc,
+  getDocsFromServer,
 } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
@@ -390,7 +764,36 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/index";
 import { db } from "../firebase/index";
+import Tabs from "../components/Tabs.vue";
+import FloorTabs from "../components/FloorTabs.vue";
+import Choosie from "../components/Choosie.vue";
+import InfoRoom from "../views/InfoRoom.vue";
 export default {
+  components: {
+    Tabs,
+    FloorTabs,
+    Choosie,
+    InfoRoom,
+  },
+  async created() {
+    const r1 = doc(db, "hostels", "houms");
+    const docSnap = await getDoc(r1);
+    console.log(docSnap.data().dormitory1.floors[1]);
+    this.rooms1 = docSnap.data().dormitory1.floors[1];
+    this.rooms2 = docSnap.data().dormitory1.floors[2];
+    this.rooms3 = docSnap.data().dormitory1.floors[3];
+    this.rooms4 = docSnap.data().dormitory1.floors[4];
+    console.log(docSnap.data().dormitory2.floors[1]);
+    this.rooms5 = docSnap.data().dormitory2.floors[1];
+    this.rooms6 = docSnap.data().dormitory2.floors[2];
+    this.rooms7 = docSnap.data().dormitory2.floors[3];
+    this.rooms8 = docSnap.data().dormitory2.floors[4];
+    this.rooms9 = docSnap.data().dormitory3.floors[1];
+    this.rooms10 = docSnap.data().dormitory3.floors[2];
+    this.rooms11 = docSnap.data().dormitory3.floors[3];
+    this.rooms12 = docSnap.data().dormitory3.floors[4];
+  },
+
   data() {
     return {
       activeTab: 1,
@@ -399,6 +802,14 @@ export default {
       rooms2: [],
       rooms3: [],
       rooms4: [],
+      rooms5: [],
+      rooms6: [],
+      rooms7: [],
+      rooms8: [],
+      rooms9: [],
+      rooms10: [],
+      rooms11: [],
+      rooms12: [],
       comanta: null,
       selectedRoom: null,
       romNumber: 0,
@@ -408,41 +819,41 @@ export default {
     };
   },
   methods: {
-    setActiveTab(tabNumber) {
-      this.activeTab = tabNumber;
+    handleTabChanged(newTab) {
+      this.activeTab = newTab;
     },
-    floactiveTab(tabNumber) {
-      this.floorTab = tabNumber;
+    floorChanged(newTab) {
+      this.floorTab = newTab;
     },
-    showCapacity(room) {
-      this.selectedRoom = room;
-      this.romNumber = this.selectedRoom.number;
+    async capacityChanged(newTab) {
+      this.selectedRoom = newTab;
+      const usersCollection = collection(db, "users");
 
-      const us = collection(db, "users");
-
-      const q = query(
-        us,
-        where("room", "==", room.number),
-        where("dormitory", "==", 1),
-        where("floor", "==", this.floorTab)
+      const userQuery = query(
+        usersCollection,
+        where("room", "==", newTab.number),
+        where("dormitory", "==", this.activeTab),
+        where("floor", "==", this.floorTab),
+        where("payment", "==", true)
       );
+      const userSnapshop = await getDocsFromServer(userQuery);
+      console.log("docs", userSnapshop.docs);
 
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const users = [];
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const user = {
-            Name: data.lastName,
-            ImageUrl: data.imageUrl,
-            fName: data.firstName,
-            corpus: data.corpus,
-            group: data.group,
-          };
-          users.push(user);
-        });
-        this.users = users;
+      const users = [];
+      userSnapshop.forEach((doc) => {
+        const data = doc.data();
+        const user = {
+          Name: data.lastName,
+          ImageUrl: data.imageUrl,
+          fName: data.firstName,
+          corpus: data.corpus,
+          group: data.group,
+        };
+        users.push(user);
       });
+      this.users = users;
     },
+
     async saveAccount() {
       const userDocRef = doc(db, "users", this.currentUser.uid);
       await updateDoc(userDocRef, {
@@ -452,7 +863,6 @@ export default {
       });
     },
   },
-
   async mounted() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -461,37 +871,6 @@ export default {
         this.currentUser = null;
       }
     });
-
-    const r1 = doc(db, "rooms", "azUEd0dd0ze5FV8fOLNW");
-    const r2 = doc(db, "rooms", "4gr2hjUJKHQeG7AHlIWD");
-    const docSnap = await getDoc(r1);
-    const docSnap2 = await getDoc(r2);
-    const r3 = doc(db, "rooms", "Q0TATiv5JbFsmsGaTttk");
-    const r4 = doc(db, "rooms", "rKNa9SxlXvO3YZ5asE95");
-    const docSnap3 = await getDoc(r3);
-    const docSnap4 = await getDoc(r4);
-
-    // define variables for the filters
-
-    if (docSnap.exists()) {
-      // console.log("Document data:", docSnap.data());
-      this.rooms1 = docSnap.data().rooms;
-    }
-
-    if (docSnap2.exists()) {
-      // console.log("Document data:", docSnap2.data());
-      this.rooms2 = docSnap2.data().rooms;
-    }
-
-    if (docSnap3.exists()) {
-      // console.log("Document data:", docSnap3.data());
-      this.rooms3 = docSnap3.data().rooms;
-    }
-
-    if (docSnap4.exists()) {
-      // console.log("Document data:", docSnap4.data());
-      this.rooms4 = docSnap4.data().rooms;
-    }
   },
 };
 </script>
