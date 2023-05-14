@@ -67,7 +67,7 @@ export default {
         { label: "Общежитие", isActive: true, link: "/Hostel" },
         { label: "Бронировать", isActive: false, link: "/Search" },
         { label: "Оплата", isActive: false, link: "/Payment" },
-        { label: "Правила", isActive: false, link: "/Rules" },
+        { label: "Пропуск", isActive: false, link: "/Rules" },
         { label: "Профиль", isActive: false, link: "/Profile" },
       ],
     };
