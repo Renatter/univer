@@ -4,7 +4,7 @@
     <div v-else>
       <div>
         <h2>Выберите шаблон грамоты:</h2>
-
+        <img style="height: 35px" src="../assets/logo.png" alt="" />
         <div class="flex">
           <div
             v-for="(template, index) in templates"
@@ -75,13 +75,13 @@ export default {
       templates: [
         {
           name: "Шаблон 1",
-          image: "src/assets/propsk.jpg",
+          image: "/src/assets/propsk.jpg",
           width: 400,
           height: 280,
         },
         {
           name: "Шаблон 2",
-          image: "src/assets/propsk2.jpg",
+          image: "/src/assets/propsk2.jpg",
           width: 400,
           height: 280,
         },
@@ -160,7 +160,7 @@ export default {
           fontSize: 15,
           width: 200,
         });
-        const image = new fabric.Image.fromURL("src/assets/logo.png", function (
+        const image = new fabric.Image.fromURL("../assets/logo.png", function (
           img
         ) {
           img.scale(0.85);
