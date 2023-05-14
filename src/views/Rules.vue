@@ -74,13 +74,13 @@ export default {
       templates: [
         {
           name: "Шаблон 1",
-          image: "src/assets/propsk.jpg",
+          image: "./src/assets/propsk.jpg",
           width: 400,
           height: 280,
         },
         {
           name: "Шаблон 2",
-          image: "src/assets/propsk2.jpg",
+          image: "./src/assets/propsk2.jpg",
           width: 400,
           height: 280,
         },
