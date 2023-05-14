@@ -26,6 +26,7 @@
         <canvas ref="canvas" />
         <button @click="createCertificate">Создать грамоту</button>
         <br />
+
         <button @click="downloadImage" v-if="showCard">Скачать грамоту</button
         ><br />
         <button @click="clearCanvas" v-if="selectedTemplate && showCard">
@@ -74,13 +75,13 @@ export default {
       templates: [
         {
           name: "Шаблон 1",
-          image: "/src/assets/propsk.jpg",
+          image: "../assets/propsk.jpg",
           width: 400,
           height: 280,
         },
         {
           name: "Шаблон 2",
-          image: "/src/assets/propsk2.jpg",
+          image: "../assets/propsk2.jpg",
           width: 400,
           height: 280,
         },
@@ -159,7 +160,7 @@ export default {
           fontSize: 15,
           width: 200,
         });
-        const image = new fabric.Image.fromURL("src/assets/logo.png", function (
+        const image = new fabric.Image.fromURL("../assets/logo.png", function (
           img
         ) {
           img.scale(0.85);
