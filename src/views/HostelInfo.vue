@@ -58,7 +58,7 @@
             </div>
           </div>
           <div class="mt-[25px]">
-            <router-link to="/Search">
+            <router-link v-if="currentUser" to="/Document">
               <a
                 href="#"
                 class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -79,6 +79,7 @@
                 </svg>
               </a>
             </router-link>
+            <p v-else class="text-[#dc2626]">войдите чтобы бронировать</p>
           </div>
         </div>
       </div>
@@ -138,8 +139,14 @@ import IosCropIcon from "vue-ionicons/dist/ios-crop.vue";
 import IosBusinessIcon from "vue-ionicons/dist/ios-business.vue";
 import IosPaperPlaneIcon from "vue-ionicons/dist/ios-paper-plane.vue";
 import IosBedIcon from "vue-ionicons/dist/ios-bed.vue";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
 
-import { db } from "../firebase/index";
+import { db, auth } from "../firebase/index";
 import { collection, getDocs, doc, query, where } from "firebase/firestore";
 export default {
   components: {
@@ -152,7 +159,7 @@ export default {
   data() {
     return {
       cards: [],
-
+      currentUser: null,
       currentImage: "",
     };
   },
@@ -184,6 +191,11 @@ export default {
       };
       this.cards.push(card);
       this.currentImage = data.infoImg[0];
+    });
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        this.currentUser = user;
+      }
     });
   },
 };

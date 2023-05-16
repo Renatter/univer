@@ -9,28 +9,48 @@
         <div class="bg-[#FFFF] p-[15px] rounded-[15px] h-[800px] relative">
           <div class="btn flex flex-col justify-between w-[240px] bg-[#FFFF]">
             <router-link
+              v-if="isAdmin"
+              v-for="(btn, index) in adminButtons"
+              @click="act(index)"
+              :key="btn"
+              :to="btn.link"
+              :class="[
+                'text-[#1d4ed8] font-medium rounded-lg text-sm px-5 py-2.5 mb-2',
+                btn.isActive
+                  ? 'bg-blue-700 text-[#f8fafc]  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none d'
+                  : 'bg-white border border-gray-300 hover:bg-gray-50 ',
+              ]"
+            >
+              {{ btn.label }}
+            </router-link>
+            <router-link
+              v-else
               v-for="(button, index) in buttons"
               @click="activateButton(index)"
               :key="button"
               :to="button.link"
               :class="[
-                'text-[#1d4ed8] font-medium rounded-lg text-sm px-5 py-2.5  mb-2',
+                'text-[#1d4ed8] font-medium rounded-lg text-sm px-5 py-2.5 mb-2',
                 button.isActive
-                  ? ' bg-blue-700 text-[#f8fafc] hover:bg-[#1d4fd84b] focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
-                  : ' bg-white border border-gray-300 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 ',
+                  ? 'bg-blue-700 text-[#f8fafc]  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none '
+                  : 'bg-white border border-gray-300 hover:bg-gray-50 ',
               ]"
             >
               {{ button.label }}
             </router-link>
 
-            <div
-              v-if="currentUser"
-              @click="signout"
-              class="absolute bottom-[50px] left-[90px] flex items-center cursor-pointer"
-            >
-              <MdExitIcon class="mr-[5px]" w="25px" h="60px" />
-              <button class="text-red-500 font-bold text-[17px]">Выход</button>
-            </div>
+            <router-link to="/Hostel">
+              <div
+                v-if="currentUser"
+                @click="signout"
+                class="absolute bottom-[50px] left-[90px] flex items-center cursor-pointer"
+              >
+                <MdExitIcon class="mr-[5px]" w="25px" h="60px" />
+                <button class="text-red-500 font-bold text-[17px]">
+                  Выход
+                </button>
+              </div>
+            </router-link>
           </div>
         </div>
 
@@ -42,12 +62,24 @@
 
 <script>
 import {
+  collection,
+  doc,
+  setDoc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+  onSnapshot,
+  updateDoc,
+  getDocsFromServer,
+} from "firebase/firestore";
+import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import { auth } from "./firebase/index";
+import { auth, db } from "./firebase/index";
 import HelloWorld from "./components/HelloWorld.vue";
 import Header from "./components/Header.vue";
 import MdExitIcon from "vue-ionicons/dist/md-exit.vue";
@@ -63,18 +95,23 @@ export default {
       pass: "",
       currentUser: null,
       hange: false,
+      isAdmin: false,
       buttons: [
+        { label: "Профиль", isActive: false, link: "/Profile" },
         { label: "Общежитие", isActive: true, link: "/Hostel" },
         { label: "Бронировать", isActive: false, link: "/Search" },
-        { label: "Оплата", isActive: false, link: "/Payment" },
         { label: "Пропуск", isActive: false, link: "/Rules" },
-        { label: "Профиль", isActive: false, link: "/Profile" },
+      ],
+      adminButtons: [
+        { label: "Профиль", isActive: true, link: "/Profile" },
+        { label: "Список", isActive: false, link: "/SearchUser" },
       ],
     };
   },
 
   methods: {
     activateButton(index) {
+      console.log(index);
       for (let i = 0; i < this.buttons.length; i++) {
         if (i === index) {
           this.buttons[i].isActive = true;
@@ -83,11 +120,21 @@ export default {
         }
       }
     },
+    act(index) {
+      for (let i = 0; i < this.adminButtons.length; i++) {
+        if (i === index) {
+          this.adminButtons[i].isActive = true;
+        } else {
+          this.adminButtons[i].isActive = false;
+        }
+      }
+    },
     change() {
       this.hange = !this.hange;
     },
     signout() {
       signOut(auth);
+      this.isAdmin = false;
     },
     register() {
       createUserWithEmailAndPassword(auth, this.email, this.pass);
@@ -97,10 +144,24 @@ export default {
       console.log(this.email, this.pass);
     },
   },
-  created() {
+  async created() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.currentUser = user;
+        const userRef = doc(db, "users", user.uid);
+        getDoc(userRef)
+          .then((doc) => {
+            if (doc.exists()) {
+              const userData = doc.data();
+
+              this.isAdmin = userData.role === "admin";
+            } else {
+              console.log("No such document!");
+            }
+          })
+          .catch((error) => {
+            console.log("Error getting document:", error);
+          });
       } else {
         this.currentUser = null;
       }

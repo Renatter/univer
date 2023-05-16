@@ -33,7 +33,7 @@
 
             <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div class="pt-[15px]">
+            <div class="pt-[15px]" v-if="currentUser">
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
@@ -94,7 +94,7 @@
 
             <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div class="pt-[15px]">
+            <div class="pt-[15px]" v-if="currentUser">
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
@@ -154,7 +154,7 @@
 
             <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div class="pt-[15px]">
+            <div class="pt-[15px]" v-if="currentUser">
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
@@ -214,7 +214,7 @@
 
             <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div class="pt-[15px]">
+            <div class="pt-[15px]" v-if="currentUser">
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
@@ -275,7 +275,7 @@
 
             <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div class="pt-[15px]">
+            <div class="pt-[15px]" v-if="currentUser">
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
@@ -336,7 +336,7 @@
 
             <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div class="pt-[15px]">
+            <div class="pt-[15px]" v-if="currentUser">
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
@@ -396,7 +396,7 @@
 
             <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div class="pt-[15px]">
+            <div class="pt-[15px]" v-if="currentUser">
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
@@ -456,7 +456,7 @@
 
             <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div class="pt-[15px]">
+            <div class="pt-[15px]" v-if="currentUser">
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
@@ -517,7 +517,7 @@
 
             <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div class="pt-[15px]">
+            <div class="pt-[15px]" v-if="currentUser">
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
@@ -578,7 +578,7 @@
 
             <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div class="pt-[15px]">
+            <div class="pt-[15px]" v-if="currentUser">
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
@@ -638,7 +638,7 @@
 
             <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div class="pt-[15px]">
+            <div class="pt-[15px]" v-if="currentUser">
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
@@ -698,7 +698,7 @@
 
             <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div class="pt-[15px]">
+            <div class="pt-[15px]" v-if="currentUser">
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"

@@ -11,6 +11,8 @@ import Payment from "../views/Payment.vue"
 import Search from "../views/Search.vue"
 import Rules from "../views/Rules.vue"
 import HostelInfo from "../views/HostelInfo.vue"
+import SearchUser from "../views/SearchUser.vue"
+import Document from "../views/Document.vue"
 const router = createRouter({
 
     history: createWebHistory(),
@@ -53,9 +55,18 @@ const router = createRouter({
             component: Search,
         },
         {
+            path: '/SearchUser',
+            name: 'SearchUser',
+            component: SearchUser,
+        },
+        {
             path: '/Rules',
             name: 'Rules',
             component: Rules,
+        }, {
+            path: '/Document',
+            name: 'Document',
+            component: Document,
         },
 
         {

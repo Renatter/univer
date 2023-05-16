@@ -24,7 +24,7 @@
             v-else
             :src="img"
             alt="user profile"
-            style="height: 50px; border-radius: 50%"
+            class="w-[50px] h-[50px] rounded-full"
           />
         </router-link>
       </template>

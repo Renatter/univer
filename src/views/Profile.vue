@@ -16,14 +16,14 @@
               <label
                 @click="showBtn = true"
                 for="dropzone-file"
-                class="bg-[#FFFF] flex flex-col items-center justify-center w-[150px] h-[150px] border-2 border-[#22c55e] border-dashed rounded-full cursor-pointer bg-[#f2faf5]"
+                class="flex flex-col items-center justify-center w-[150px] h-[150px] border-2 border-[#22c55e] border-dashed rounded-full cursor-pointer bg-[#f2faf5]"
               >
                 <div
-                  class="bg-[#FFFF] flex flex-col items-center justify-center pt-5 pb-6"
+                  class="flex flex-col items-center justify-center pt-5 pb-6"
                 >
                   <svg
                     aria-hidden="true"
-                    class="w-10 h-10 mb-3 text-gray-400 bg-[#FFFF]"
+                    class="w-10 h-10 mb-3 text-gray-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -37,11 +37,9 @@
                     ></path>
                   </svg>
                   <p
-                    class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center bg-[#FFFF]"
+                    class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center"
                   >
-                    <span class="font-semibold bg-[#FFFF]"
-                      >Click to upload</span
-                    >
+                    <span class="font-semibold">Click to upload</span>
                     or drag and drop
                   </p>
                 </div>
@@ -295,7 +293,7 @@
         </div>
       </div>
     </div>
-    <div v-else>Войдите в аккаунт</div>
+    <div v-else><p class="text-[#dc2626]">Войдите в аккаунт</p></div>
   </div>
 </template>
 
@@ -412,6 +410,7 @@ export default {
       });
     },
     swithRed() {
+      this.showBtn = false;
       (this.textImg = false), (this.isEditing = true);
     },
     async deleteAccount() {

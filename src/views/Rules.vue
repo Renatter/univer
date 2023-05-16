@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-[800px]">
-    <div v-if="!payment">сделайте бронирование</div>
+    <div v-if="payment === false">сделайте бронирование</div>
     <div v-else>
       <div>
         <h2>Выберите шаблон грамоты:</h2>
@@ -62,7 +62,7 @@ import {
 export default {
   data() {
     return {
-      payment: true,
+      payment: false,
       index: null,
       showCard: false,
       ln: "",

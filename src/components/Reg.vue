@@ -281,6 +281,9 @@ export default {
         floor: null,
         dormitory: null,
         payment: false,
+        fluorogra: null,
+        idcard: null,
+        studentcard: null,
 
         // Добавьте другие данные пользователя, которые вы хотите сохранить в базе данных
       });
