@@ -13,6 +13,7 @@ import Rules from "../views/Rules.vue"
 import HostelInfo from "../views/HostelInfo.vue"
 import SearchUser from "../views/SearchUser.vue"
 import Document from "../views/Document.vue"
+import Zapros from "../views/Zapros.vue"
 const router = createRouter({
 
     history: createWebHistory(),
@@ -67,6 +68,11 @@ const router = createRouter({
             path: '/Document',
             name: 'Document',
             component: Document,
+        },
+        {
+            path: '/Zapros',
+            name: 'Zapros',
+            component: Zapros,
         },
 
         {

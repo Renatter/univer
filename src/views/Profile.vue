@@ -2,6 +2,7 @@
   <div
     class="bg-[#F4F4F7] w-full ml-[25px] rounded-[15px] p-[25px] h-[800px] bg-[#FFFF]"
   >
+    {{ currentUser.uid }}
     <div
       v-if="currentUser && currentUser.email"
       class="profile-info flex items-stretch pt-[50px] bg-[#FFFF]"
@@ -271,10 +272,23 @@
                     </p>
                   </div>
                   <p
+                    v-if="dormitory"
                     class="text-[#b3b3b3] pt-[44px] font-bold bg-[#FFFF] mb-[32px]"
                   >
                     Общежитие: {{ dormitory }} Этаж {{ floor }} Комната:
                     {{ room }}
+                  </p>
+                  <p
+                    v-if="queue"
+                    class="text-[#e11d48] pt-[44px] font-bold bg-[#FFFF] mb-[32px]"
+                  >
+                    Ожидаине ответа от администрации
+                  </p>
+                  <p
+                    v-if="!payment"
+                    class="text-[#b3b3b3] pt-[44px] font-bold bg-[#FFFF] mb-[32px]"
+                  >
+                    сделайте бронирование
                   </p>
                 </div>
                 <div>
@@ -285,6 +299,14 @@
                     class="pt-[11px] mt-[50px] focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                   >
                     Отменить оплату
+                  </router-link>
+                  <router-link
+                    to="/Hostel"
+                    v-if="!payment && !queue"
+                    @click="closePay"
+                    class="pt-[11px] mt-[65px] focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  >
+                    Сделать бронирование
                   </router-link>
                 </div>
               </div>
@@ -326,6 +348,8 @@ export default {
       dormitory: null,
       floor: null,
       room: null,
+      queue: null,
+
       showBtn: false,
       loginCount: 0,
       payment: false,
@@ -492,6 +516,7 @@ export default {
           this.dormitory = userDoc.data().dormitory;
           this.floor = userDoc.data().floor;
           this.room = userDoc.data().room;
+          this.queue = userDoc.data().queue;
           this.phone = userDoc.data().phone;
           this.imageUrl = userDoc.data().profilePictureUrl || "";
         } else {

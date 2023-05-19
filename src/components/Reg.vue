@@ -284,7 +284,9 @@ export default {
         fluorogra: null,
         idcard: null,
         studentcard: null,
-
+        access: null,
+        queue: null,
+        rejected: null,
         // Добавьте другие данные пользователя, которые вы хотите сохранить в базе данных
       });
       this.$router.push({

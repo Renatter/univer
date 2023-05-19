@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-full">
+  <div
+    class="bg-[#FFFF] w-full ml-[25px] mb-[30px] rounded-[15px] p-[25px] min-h-[800px]"
+  >
     <div class="flex justify-between">
       <div class="flex mb-[20px]">
         <input
@@ -14,6 +16,7 @@
         >
           Search
         </button>
+        {{}}
       </div>
       <div>
         <button
@@ -29,7 +32,7 @@
     <div class="flex flex-wrap">
       <div
         v-if="!all"
-        class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
+        class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[500px]"
       >
         <img
           class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
@@ -57,29 +60,68 @@
       <div
         v-if="all"
         v-for="user in displayedUsers"
-        class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
+        class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[500px] justify-between"
       >
-        <img
-          class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
-          :src="user.ImageUrl"
-        />
+        <div class="flex">
+          <img
+            class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+            :src="user.ImageUrl"
+          />
+          <div>
+            <div class="flex">
+              <p>Имя:</p>
+              <p>{{ user.fName }}</p>
+            </div>
+            <div class="flex">
+              <p>Фамилия :</p>
+              <p>{{ user.Name }}</p>
+            </div>
+            <div class="flex">
+              <p>Корпус :</p>
+              <p>Ак</p>
+            </div>
+            <div class="flex">
+              <p>Группа :</p>
+              <p>{{ user.group }}</p>
+            </div>
+
+            <div class="flex">
+              <p>Удастак :</p>
+              <a target="new" :href="user.idcard" class="text-[#1d4ed8]">
+                Открыть
+              </a>
+            </div>
+            <div class="flex">
+              <p>Флюр :</p>
+              <a class="text-[#1d4ed8]" target="new" :href="user.fluorogra">
+                Открыть
+              </a>
+            </div>
+            <div class="flex">
+              <p>Стунд билет :</p>
+              <a target="new" :href="user.studentcard" class="text-[#1d4ed8]">
+                Открыть
+              </a>
+            </div>
+          </div>
+        </div>
         <div>
-          <div class="flex">
-            <p>Имя:</p>
-            <p>{{ user.fName }}</p>
+          <div>
+            <button
+              @click="accessUser(user.email)"
+              type="button"
+              class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 w-[130px]"
+            >
+              Принять
+            </button>
           </div>
-          <div class="flex">
-            <p>Фамилия :</p>
-            <p>{{ user.Name }}</p>
-          </div>
-          <div class="flex">
-            <p>Корпус :</p>
-            <p>{{ user.corpus }}</p>
-          </div>
-          <div class="flex">
-            <p>Группа :</p>
-            <p>{{ user.group }}</p>
-          </div>
+          <button
+            @click="rejectedUser(user.email)"
+            type="button"
+            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 w-[130px]"
+          >
+            Отклонить
+          </button>
         </div>
       </div>
     </div>
@@ -122,12 +164,15 @@ export default {
       searchMode: "",
       allUsers: [], // your complete list of users
       currentPage: 1, // current page of users
-      pageSize: 5, // number of users per page
+      pageSize: 3, // number of users per page
       ImageUrl: "",
       all: true,
       corpus: null,
       group: null,
       queue: null,
+      idcard: "",
+      studentcard: "",
+      fluorogra: "",
     };
   },
   computed: {
@@ -140,7 +185,55 @@ export default {
       return this.allUsers.slice(start, end);
     },
   },
+
   methods: {
+    async accessUser(email) {
+      const usersCollection = collection(db, "users");
+      const userQuery = query(usersCollection, where("email", "==", email));
+      const querySnapshot = await getDocs(userQuery);
+
+      querySnapshot.forEach(async (doc) => {
+        const userRef = doc.ref;
+        console.log(doc.id, " => ", doc.data());
+
+        // Обновление данных пользователя
+        await updateDoc(userRef, {
+          // Новые значения полей для обновления
+          access: true,
+          queue: false,
+          rejected: false,
+
+          // ...
+        });
+
+        console.log("Данные пользователя обновлены");
+      });
+    },
+    async rejectedUser(email) {
+      const usersCollection = collection(db, "users");
+      const userQuery = query(usersCollection, where("email", "==", email));
+      const querySnapshot = await getDocs(userQuery);
+
+      querySnapshot.forEach(async (doc) => {
+        const userRef = doc.ref;
+        console.log(doc.id, " => ", doc.data());
+
+        // Обновление данных пользователя
+        await updateDoc(userRef, {
+          // Новые значения полей для обновления
+          access: false,
+          queue: false,
+          rejected: true,
+          fluorogra: null,
+          studentcard: null,
+          idcard: null,
+
+          // ...
+        });
+
+        console.log("Данные пользователя обновлены");
+      });
+    },
     nextPage() {
       if (this.currentPage < this.totalPages) {
         this.currentPage++;
@@ -168,24 +261,31 @@ export default {
         this.surname = doc.data().lastName;
         this.group = doc.data().group;
         this.corpus = doc.data().corpus;
+        this.fluorogra = doc.data().fluorogra;
+        this.idcard = doc.data().idcard;
+        this.studentcard = doc.data.studentcard;
       });
     },
   },
   async created() {
     const Alluser = collection(db, "users");
-    const p = query(Alluser, where("payment", "==", true));
+    const p = query(Alluser, where("queue", "==", true));
     onSnapshot(p, (querySnapshot) => {
       const users = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
         const user = {
           Name: data.lastName,
-
           ImageUrl: data.imageUrl,
           fName: data.firstName,
           corpus: data.corpus,
           group: data.group,
+          fluorogra: data.fluorogra,
+          idcard: data.idcard,
+          studentcard: data.studentcard,
+          email: data.email,
         };
+        console.log(user);
         users.push(user);
       });
       this.allUsers = users;

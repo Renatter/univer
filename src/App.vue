@@ -96,6 +96,7 @@ export default {
       currentUser: null,
       hange: false,
       isAdmin: false,
+      allUsers: [],
       buttons: [
         { label: "Профиль", isActive: false, link: "/Profile" },
         { label: "Общежитие", isActive: true, link: "/Hostel" },
@@ -105,6 +106,7 @@ export default {
       adminButtons: [
         { label: "Профиль", isActive: true, link: "/Profile" },
         { label: "Список", isActive: false, link: "/SearchUser" },
+        { label: "Запросы", isActive: false, link: "/Zapros" },
       ],
     };
   },
@@ -149,6 +151,24 @@ export default {
       if (user) {
         this.currentUser = user;
         const userRef = doc(db, "users", user.uid);
+        const Alluser = collection(db, "users");
+        const p = query(Alluser, where("payment", "==", true));
+        onSnapshot(p, (querySnapshot) => {
+          const users = [];
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const user = {
+              Name: data.lastName,
+
+              ImageUrl: data.imageUrl,
+              fName: data.firstName,
+              corpus: data.corpus,
+              group: data.group,
+            };
+            users.push(user);
+          });
+          this.allUsers = users;
+        });
         getDoc(userRef)
           .then((doc) => {
             if (doc.exists()) {
