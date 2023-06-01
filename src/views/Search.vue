@@ -35,7 +35,12 @@
 
             <div
               class="pt-[15px]"
-              v-if="currentUser && users.length < 3 && payment === false"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === true
+              "
             >
               <router-link
                 @click="saveAccount"
@@ -43,6 +48,23 @@
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
                 Pay</router-link
+              >
+            </div>
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === null
+              "
+            >
+              <router-link
+                @click="saveAccount"
+                to="/Document"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Отправить документы</router-link
               >
             </div>
           </div>
@@ -819,6 +841,7 @@ export default {
       payment: null,
       users: [],
       currentUser: null,
+      access: null,
     };
   },
   methods: {
@@ -876,6 +899,7 @@ export default {
         console.log(userDoc.data());
         if (userDoc.exists()) {
           this.payment = userDoc.data().payment;
+          this.access = userDoc.data().access;
 
           this.cardName =
             userDoc.data().firstName + " " + userDoc.data().lastName;

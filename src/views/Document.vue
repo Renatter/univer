@@ -111,7 +111,7 @@
         <label
           class="block text-sm font-medium text-gray-900 dark:text-white pt-[50px] text-[25px] mb-[15px]"
           for="file_input1"
-          >Удостоверение личности</label
+          >Флюорография</label
         >
         <div>
           <input
@@ -159,7 +159,7 @@
         <label
           class="block text-sm font-medium text-gray-900 dark:text-white pt-[50px] text-[25px] mb-[15px]"
           for="file_input2"
-          >Удостоверение личности</label
+          >Студенческий билет</label
         >
         <div>
           <input
