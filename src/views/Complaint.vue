@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-[700px]">
-    <div v-if="payment === false">
+    <div v-if="payment === false || currentUser == false">
       <div>
         <div class="flex items-center justify-center pt-[200px]">
           <div role="status">
@@ -146,6 +146,7 @@ export default {
       complaintImg: [],
       complaintMsg: "",
       complaintImgUrl: "",
+      currentUser: false,
     };
   },
   methods: {

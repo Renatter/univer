@@ -23,6 +23,7 @@
             >
               {{ btn.label }}
             </router-link>
+
             <router-link
               v-else
               v-for="(button, index) in buttons"
@@ -114,6 +115,7 @@ export default {
 
   methods: {
     activateButton(index) {
+      console.log(this.$route);
       console.log(index);
       for (let i = 0; i < this.buttons.length; i++) {
         if (i === index) {

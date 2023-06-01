@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-full">
-    <h1 class="text-[35px]">Место {{ this.$route.params.id }}</h1>
+    <h1 class="text-[25px]">Место {{ this.$route.params.id }}</h1>
 
     <div>
       <div class="wrapper" id="app">
@@ -218,6 +218,7 @@
               <input
                 type="text"
                 id="cardNumber"
+                maxlength="19"
                 class="card-input__input"
                 v-mask="generateCardNumberMask"
                 v-model="cardNumber"

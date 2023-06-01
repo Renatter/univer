@@ -272,7 +272,7 @@
                     </p>
                   </div>
                   <p
-                    v-if="dormitory"
+                    v-if="dormitory && payment"
                     class="text-[#b3b3b3] pt-[44px] font-bold bg-[#FFFF] mb-[32px]"
                   >
                     Общежитие: {{ dormitory }} Этаж {{ floor }} Комната:
@@ -303,7 +303,6 @@
                   <router-link
                     to="/Hostel"
                     v-if="!payment && !queue"
-                    @click="closePay"
                     class="pt-[11px] mt-[65px] focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                   >
                     Сделать бронирование
