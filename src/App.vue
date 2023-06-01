@@ -3,7 +3,7 @@
     <Header />
   </div>
 
-  <div class="bg-[#F4F4F7] h-full">
+  <div class="bg-[#F4F4F7] h-full pb-[35px]">
     <div class="header">
       <div class="flex items-start pt-[30px]">
         <div class="bg-[#FFFF] p-[15px] rounded-[15px] h-[800px] relative">
@@ -102,11 +102,12 @@ export default {
         { label: "Общежитие", isActive: true, link: "/Hostel" },
         { label: "Бронировать", isActive: false, link: "/Search" },
         { label: "Пропуск", isActive: false, link: "/Rules" },
+        { label: "Жалоба", isActive: false, link: "/Complaint" },
       ],
       adminButtons: [
-        { label: "Профиль", isActive: true, link: "/Profile" },
         { label: "Список", isActive: false, link: "/SearchUser" },
         { label: "Запросы", isActive: false, link: "/Zapros" },
+        { label: "Жалоба", isActive: false, link: "/AdminComplaint" },
       ],
     };
   },
@@ -190,6 +191,9 @@ export default {
 };
 </script>
 <style>
+body {
+  font-family: "Montserrat Alternates", sans-serif;
+}
 .header {
   width: 1200px;
   margin: 0 auto;

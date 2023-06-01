@@ -551,7 +551,7 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="scss" scoped>
 * {
   font-family: "Montserrat Alternates", sans-serif;
 }

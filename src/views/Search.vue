@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-[800px]">
+  <div class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-full">
     <div class="text-center">
       <Tabs @tab-changed="handleTabChanged" />
       <div v-if="activeTab === 1" class="pt-[55px]">
@@ -33,7 +33,10 @@
 
             <p>Занято {{ users.length }}из 3 мест</p>
 
-            <div class="pt-[15px]" v-if="currentUser && users.length < 3">
+            <div
+              class="pt-[15px]"
+              v-if="currentUser && users.length < 3 && payment === false"
+            >
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
@@ -813,7 +816,7 @@ export default {
       comanta: null,
       selectedRoom: null,
       romNumber: 0,
-
+      payment: null,
       users: [],
       currentUser: null,
     };
@@ -864,11 +867,19 @@ export default {
     },
   },
   async mounted() {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
         this.currentUser = user;
-      } else {
-        this.currentUser = null;
+        // Получаем данные пользователя из Firestore
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
+        console.log(userDoc.data());
+        if (userDoc.exists()) {
+          this.payment = userDoc.data().payment;
+
+          this.cardName =
+            userDoc.data().firstName + " " + userDoc.data().lastName;
+        }
       }
     });
   },

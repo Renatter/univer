@@ -14,6 +14,8 @@ import HostelInfo from "../views/HostelInfo.vue"
 import SearchUser from "../views/SearchUser.vue"
 import Document from "../views/Document.vue"
 import Zapros from "../views/Zapros.vue"
+import Complaint from "../views/Complaint.vue"
+import AdminComplaint from "../views/AdminCompaint.vue"
 const router = createRouter({
 
     history: createWebHistory(),
@@ -81,9 +83,17 @@ const router = createRouter({
             component: HostelInfo,
             props: true
         },
+        {
+            path: '/Complaint',
+            name: 'Complaint',
+            component: Complaint,
+        },
 
-
-
+        {
+            path: '/AdminComplaint',
+            name: 'AdminComplaint',
+            component: AdminComplaint,
+        },
 
 
     ]

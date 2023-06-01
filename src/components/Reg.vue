@@ -287,6 +287,10 @@ export default {
         access: null,
         queue: null,
         rejected: null,
+        rejectMsg: null,
+        complaintImg: null,
+        complaintMsg: null,
+        complaint: false,
         // Добавьте другие данные пользователя, которые вы хотите сохранить в базе данных
       });
       this.$router.push({

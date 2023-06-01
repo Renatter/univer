@@ -25,6 +25,7 @@
     "vue-filepond": "^7.0.3",
     "vue-html2pdf": "^1.8.0",
     "vue-ionicons": "^3.0.5",
+    "vue-picture-input": "^2.4.0",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {

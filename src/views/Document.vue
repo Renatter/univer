@@ -52,7 +52,9 @@
       <div class="">
         <p class="text-center text-[#E02424] font-bold text-[30px] pt-[25px]">
          Откланен
-         <div> <button @click="repeatDocument" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Повторить</button></div>
+         <div class="text-[20px] text-[#64748b]">Причина: {{ rejectMsg }}</div>
+         <div> 
+          <button @click="repeatDocument" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Повторить</button></div>
         </p>
       </div>
     </div>
@@ -261,6 +263,7 @@ export default {
       queue: null,
       access: null,
       rejected:null,
+      rejectMsg:null
     };
   },
   methods: {
@@ -270,6 +273,7 @@ export default {
     await updateDoc(userDocRef, {
     
       rejected: false,
+      rejectMsg:null
       // ...другие поля для обновления
     });
   });
@@ -399,6 +403,7 @@ export default {
             this.queue = doc.data().queue;
             this.access = doc.data().access;
             this.rejected = doc.data().rejected;
+            this.rejectMsg = doc.data().rejectMsg
           }
         });
       }

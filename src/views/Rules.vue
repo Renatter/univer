@@ -1,6 +1,35 @@
 <template>
   <div class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-[800px]">
-    <div v-if="payment === false">сделайте бронирование</div>
+    <div
+      v-if="payment === false"
+      class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-[700px]"
+    >
+      <div>
+        <div class="flex items-center justify-center pt-[200px]">
+          <div role="status">
+            <svg
+              class="mr-2 text-gray-200 dark:text-[#E02424] fill-[#E02424] w-[130px] h-[130px]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        <div class="">
+          <p class="text-center text-[#E02424] font-bold text-[30px] pt-[25px]">
+            Страница доступна только для членов общежития
+          </p>
+        </div>
+      </div>
+    </div>
     <div v-else>
       <div>
         <h2>Выберите шаблон грамоты:</h2>
@@ -72,6 +101,7 @@ export default {
       room: "",
       obsh: "",
       floor: "",
+      access: null,
       templates: [
         {
           name: "Шаблон 1",
@@ -211,6 +241,7 @@ export default {
           this.obsh = userDoc.data().dormitory;
           this.room = userDoc.data().room;
           this.payment = userDoc.data().payment;
+          this.access = userDoc.data().access;
         }
       }
     });
