@@ -60,8 +60,14 @@
         class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
       >
         <img
+          v-if="user.ImageUrl"
           class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
           :src="user.ImageUrl"
+        />
+        <img
+          v-else
+          class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+          src="https://uhd.name/uploads/posts/2023-03/1679056281_uhd-name-p-zaza-napoli-bez-makiyazha-instagram-85.jpg"
         />
         <div>
           <div class="flex">
