@@ -2,7 +2,6 @@
   <div
     class="bg-[#F4F4F7] w-full ml-[25px] rounded-[15px] p-[25px] h-[800px] bg-[#FFFF]"
   >
-    {{ currentUser.uid }}
     <div
       v-if="currentUser && currentUser.email"
       class="profile-info flex items-stretch pt-[50px] bg-[#FFFF]"

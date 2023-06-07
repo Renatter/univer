@@ -1,6 +1,7 @@
 <template>
   <div class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-full">
-    <div class="text-center">
+    <h1 class="font-bold text-[30px] text-[#1D4ED8]">Выбор мест</h1>
+    <div class="text-center pt-[25px]">
       <Tabs @tab-changed="handleTabChanged" />
       <div v-if="activeTab === 1" class="pt-[55px]">
         <FloorTabs @tab-x="floorChanged" />
@@ -47,7 +48,7 @@
                 :to="{ path: '/Payment/' + selectedRoom.number }"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Pay</router-link
+                Оплатить</router-link
               >
             </div>
             <div

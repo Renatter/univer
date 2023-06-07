@@ -2,6 +2,7 @@
   <div
     class="bg-[#FFFF] w-full ml-[25px] mb-[30px] rounded-[15px] p-[25px] min-h-[800px]"
   >
+  <h1 class="font-bold text-[30px] text-[#1D4ED8]">Отправка документов</h1>
     <div v-if="queue">
       <div class="flex items-center justify-center pt-[200px]">
         <div role="status">
