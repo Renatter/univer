@@ -11,12 +11,11 @@
             <router-link
               v-if="isAdmin"
               v-for="(btn, index) in adminButtons"
-              @click="act(index)"
               :key="btn"
               :to="btn.link"
               :class="[
                 'text-[#1d4ed8] font-medium rounded-lg text-sm px-5 py-2.5 mb-2',
-                btn.isActive
+                $route.path.includes(btn.link)
                   ? 'bg-blue-700 text-[#f8fafc]  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none d'
                   : 'bg-white border border-gray-300 hover:bg-gray-50 ',
               ]"
@@ -27,12 +26,11 @@
             <router-link
               v-else
               v-for="(button, index) in buttons"
-              @click="activateButton(index)"
               :key="button"
               :to="button.link"
               :class="[
                 'text-[#1d4ed8] font-medium rounded-lg text-sm px-5 py-2.5 mb-2',
-                button.isActive
+                $route.path.includes(button.link)
                   ? 'bg-blue-700 text-[#f8fafc]  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none '
                   : 'bg-white border border-gray-300 hover:bg-gray-50 ',
               ]"
@@ -99,41 +97,21 @@ export default {
       isAdmin: false,
       allUsers: [],
       buttons: [
-        { label: "header.profil", isActive: true, link: "/Profile" },
-        { label: "header.hotel", isActive: false, link: "/Hostel" },
-        { label: "header.book", isActive: false, link: "/Search" },
-        { label: "header.card", isActive: false, link: "/Rules" },
-        { label: "header.complaint", isActive: false, link: "/Complaint" },
+        { label: "header.profil", link: "/Profile" },
+        { label: "header.hotel", link: "/Hostel" },
+        { label: "header.book", link: "/Search" },
+        { label: "header.card", link: "/Rules" },
+        { label: "header.complaint", link: "/Complaint" },
       ],
       adminButtons: [
-        { label: "header.adminList", isActive: false, link: "/SearchUser" },
-        { label: "header.request", isActive: false, link: "/Zapros" },
-        { label: "header.complaint", isActive: false, link: "/AdminComplaint" },
+        { label: "header.adminList", link: "/SearchUser" },
+        { label: "header.request", link: "/Zapros" },
+        { label: "header.complaint", link: "/AdminComplaint" },
       ],
     };
   },
 
   methods: {
-    activateButton(index) {
-      console.log(this.$route);
-      console.log(index);
-      for (let i = 0; i < this.buttons.length; i++) {
-        if (i === index) {
-          this.buttons[i].isActive = true;
-        } else {
-          this.buttons[i].isActive = false;
-        }
-      }
-    },
-    act(index) {
-      for (let i = 0; i < this.adminButtons.length; i++) {
-        if (i === index) {
-          this.adminButtons[i].isActive = true;
-        } else {
-          this.adminButtons[i].isActive = false;
-        }
-      }
-    },
     change() {
       this.hange = !this.hange;
     },

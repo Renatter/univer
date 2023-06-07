@@ -2,7 +2,7 @@
   <div
     class="bg-[#FFFF] w-full ml-[25px] mb-[30px] rounded-[15px] p-[25px] min-h-[800px]"
   >
-  <h1 class="font-bold text-[30px] text-[#1D4ED8]">{{ $t("zapros.title") }}</h1>
+  <h1 class="font-bold text-[30px] text-[#1D4ED8]">{{ $t("document.title") }}</h1>
     <div v-if="queue">
       <div class="flex items-center justify-center pt-[200px]">
         <div role="status">
@@ -25,7 +25,7 @@
         </div>
       </div>
       <p class="text-center text-[#1d4ed8] font-bold text-[30px] pt-[25px]">
-        {{ $t("zapros.wait") }}
+        {{ $t("document.wait") }}
       </p>
     </div>
     <div v-if="access">
@@ -37,8 +37,8 @@
       </div>
       <div class="">
         <p class="text-center text-[#31C48D] font-bold text-[30px] pt-[25px]">
-          {{ $t("zapros.success") }}
-         <div> <router-link to="/Search"  type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">  {{ $t("zapros.book") }}</router-link></div>
+          {{ $t("document.success") }}
+         <div> <router-link to="/Search"  type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">  {{ $t("document.book") }}</router-link></div>
         </p>
       </div>
     </div>
@@ -52,10 +52,10 @@
       </div>
       <div class="">
         <p class="text-center text-[#E02424] font-bold text-[30px] pt-[25px]">
-          {{ $t("zapros.Rejected") }}
-         <div class="text-[20px] text-[#64748b]">  {{ $t("zapros.Reason") }} : {{ rejectMsg }}</div>
+          {{ $t("document.Rejected") }}
+         <div class="text-[20px] text-[#64748b]">  {{ $t("document.Reason") }} : {{ rejectMsg }}</div>
          <div> 
-          <button @click="repeatDocument" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"> {{ $t("zapros.repeat") }}</button></div>
+          <button @click="repeatDocument" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"> {{ $t("document.repeat") }}</button></div>
         </p>
       </div>
     </div>
@@ -64,7 +64,7 @@
         <label
           class="block text-sm font-medium text-gray-900 dark:text-white pt-[50px] text-[35px] mb-[15px]"
           for="file_input"
-          >{{ $t("zapros.udostak") }}</label
+          >{{ $t("document.udostak") }}</label
         >
         <div>
           <input
@@ -80,14 +80,14 @@
               :href="idcardUrl"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
-            {{ $t("zapros.openDoc") }}
+            {{ $t("document.openDoc") }}
             </a>
             <button
               target="new"
               @click="delteIdcard"
               class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
             >
-            {{ $t("zapros.deleteDoc") }}
+            {{ $t("document.deleteDoc") }}
             </button>
           </div>
         </div>
@@ -96,14 +96,14 @@
             @click="uploadImage"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
-          {{ $t("zapros.downl") }}
+          {{ $t("document.downl") }}
           </button>
           <button
             v-if="file || idcardUrl"
             @click="resetFileInput"
             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
           >
-          {{ $t("zapros.clear") }}
+          {{ $t("document.clear") }}
           </button>
         </div>
       </div>
@@ -112,7 +112,7 @@
         <label
           class="block text-sm font-medium text-gray-900 dark:text-white pt-[50px] text-[35px] mb-[15px]"
           for="file_input1"
-          >  {{ $t("zapros.flur") }}</label
+          >  {{ $t("document.flur") }}</label
         >
         <div>
           <input
@@ -128,14 +128,14 @@
               :href="flurUrl"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
-               {{ $t("zapros.openDoc") }} 
+               {{ $t("document.openDoc") }} 
             </a>
             <button
               target="new"
               @click="delteFlur"
               class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
             >
-               {{ $t("zapros.deleteDoc") }}
+               {{ $t("document.deleteDoc") }}
             </button>
           </div>
         </div>
@@ -144,14 +144,14 @@
             @click="uploadFlur"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
-          {{ $t("zapros.downl") }}
+          {{ $t("document.downl") }}
           </button>
           <button
             v-if="file1"
             @click="resetFileInput1"
             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
           >
-          {{ $t("zapros.clear") }}
+          {{ $t("document.clear") }}
           </button>
         </div>
       </div>
@@ -160,7 +160,7 @@
         <label
           class="block text-sm font-medium text-gray-900 dark:text-white pt-[50px] text-[35px] mb-[15px]"
           for="file_input2"
-          > {{ $t("zapros.studCard") }}</label
+          > {{ $t("document.studCard") }}</label
         >
         <div>
           <input
@@ -176,14 +176,14 @@
               :href="studentUrl"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
-               {{ $t("zapros.openDoc") }} 
+               {{ $t("document.openDoc") }} 
             </a>
             <button
               target="new"
               @click="delteStud"
               class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
             >
-               {{ $t("zapros.deleteDoc") }}
+               {{ $t("document.deleteDoc") }}
             </button>
           </div>
         </div>
@@ -192,14 +192,14 @@
             @click="uploadStudent"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
-             {{ $t("zapros.downl") }}
+             {{ $t("document.downl") }}
           </button>
           <button
             v-if="file2"
             @click="resetFileInput2"
             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
           >
-          {{ $t("zapros.clear") }}
+          {{ $t("document.clear") }}
           </button>
         </div>
       </div>
@@ -208,7 +208,7 @@
         class="text-[#31C48D] pt-[55px] text-[25px]"
        
       >
-      {{ $t("zapros.alert") }}
+      {{ $t("document.alert") }}
       </p>
       <button
       
@@ -216,7 +216,7 @@
         type="button"
         class="mt-[25px] focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
       >
-      {{ $t("zapros.sharedDoc") }}
+      {{ $t("document.sharedDoc") }}
       </button>
       </div>
       

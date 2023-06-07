@@ -8,8 +8,8 @@
         :class="[
           'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
           floorTab === 1
-            ? 'text-[#1e293b] bg-[#d1d5db]'
-            : 'hover:text-[#1e293b] hover:bg-[#1e293b] ',
+            ? 'text-[#1e40af] active'
+            : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
         ]"
         @click="floactiveTab(1)"
         aria-current="page"
@@ -22,8 +22,8 @@
         :class="[
           'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
           floorTab === 2
-            ? 'text-[#1e293b]  bg-[#d1d5db]'
-            : 'hover:text-[#1e293b] hover:bg-[#1e293b] dark:hover:bg-gray-800 dark:hover:text-white',
+            ? 'text-[#1e40af] active'
+            : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
         ]"
         @click="floactiveTab(2)"
         aria-current="page"
@@ -35,8 +35,8 @@
         :class="[
           'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
           floorTab === 3
-            ? 'text-[#1e293b]  bg-[#d1d5db]'
-            : 'hover:text-[#1e293b] hover:bg-[#1e293b] dark:hover:bg-gray-800 dark:hover:text-white',
+            ? 'text-[#1e40af] active'
+            : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
         ]"
         @click="floactiveTab(3)"
         aria-current="page"
@@ -49,8 +49,8 @@
         :class="[
           'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
           floorTab === 4
-            ? 'text-[#1e293b] bg-[#d1d5db]'
-            : 'hover:text-[#1e293b] hover:bg-[#1e293b] dark:hover:bg-gray-800 dark:hover:text-white',
+            ? 'text-[#1e40af] active'
+            : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
         ]"
         @click="floactiveTab(4)"
         aria-current="page"
@@ -84,6 +84,6 @@ ul a {
 
 ul a.active,
 ul a:hover {
-  background-color: #d1d5db;
+  background-color: #94a3b8;
 }
 </style>

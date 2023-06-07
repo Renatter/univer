@@ -5,31 +5,6 @@
     <h1 class="font-bold text-[30px] text-[#1D4ED8] mb-[15px]">
       {{ $t("complaints.title") }}
     </h1>
-    <div class="flex justify-between">
-      <div class="flex mb-[20px]">
-        <input
-          v-model="searchMode"
-          type="text"
-          id="first_name"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[330px] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        />
-        <button
-          class="ml-[15px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          @click="Search(searchMode)"
-        >
-          {{ $t("complaints.seacbtn") }}
-        </button>
-      </div>
-      <div>
-        <button
-          class="ml-[15px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          v-if="!all"
-          @click="all = true"
-        >
-          {{ $t("complaints.allUser") }}
-        </button>
-      </div>
-    </div>
 
     <div class="flex flex-wrap">
       <div
@@ -37,9 +12,16 @@
         class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[500px]"
       >
         <img
+          v-if="user.ImageUrl"
           class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
-          :src="ImageUrl"
+          :src="user.ImageUrl"
         />
+        <img
+          v-else
+          class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+          src="https://uhd.name/uploads/posts/2023-03/1679056281_uhd-name-p-zaza-napoli-bez-makiyazha-instagram-85.jpg"
+        />
+
         <div>
           <div class="flex">
             <p>{{ $t("complaints.name") }}:</p>
@@ -97,7 +79,7 @@
         <div>
           <div>
             <button
-              @click="toggleModal"
+              @click="toggleModal(user.email)"
               class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               type="button"
             >
@@ -105,7 +87,7 @@
             </button>
 
             <div
-              v-if="isModalOpen"
+              v-if="user.isModalOpen"
               class="flex items-center justify-center pt-[100px] fixed top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-50"
             >
               <div class="relative w-full max-w-md max-h-full">
@@ -113,7 +95,7 @@
                   class="relative bg-white rounded-lg shadow dark:bg-gray-700"
                 >
                   <button
-                    @click="hideModal"
+                    @click="toggleModal(user.email)"
                     type="button"
                     class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
                   >
@@ -150,7 +132,7 @@
                         {{ $t("complaints.accept") }}
                       </button>
                       <button
-                        @click="hideModal"
+                        @click="toggleModal(user.email)"
                         type="button"
                         class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
                       >
@@ -199,7 +181,6 @@ import { db } from "../firebase/index";
 export default {
   data() {
     return {
-      isModalOpen: false,
       name: "",
       surname: "",
       searchMode: "",
@@ -245,23 +226,17 @@ export default {
 
           // ...
         });
-        this.hideModal();
-
         console.log("Данные пользователя обновлены");
       });
     },
-    toggleModal() {
-      this.isModalOpen = !this.isModalOpen;
+    toggleModal(email) {
+      this.allUsers = this.allUsers.map((user) => {
+        if (user.email == email) {
+          user.isModalOpen = !user.isModalOpen;
+        }
+        return user;
+      });
     },
-    hideModal() {
-      this.isModalOpen = false;
-    },
-    deleteProduct() {
-      // Perform the delete action here
-      console.log("Product deleted");
-      this.hideModal();
-    },
-
     nextPage() {
       if (this.currentPage < this.totalPages) {
         this.currentPage++;
@@ -312,6 +287,7 @@ export default {
           complaintMsg: data.complaintMsg,
           complaint: data.complaint,
           email: data.email,
+          isModalOpen: false,
         };
         console.log(user);
         users.push(user);
