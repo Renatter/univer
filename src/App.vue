@@ -21,7 +21,7 @@
                   : 'bg-white border border-gray-300 hover:bg-gray-50 ',
               ]"
             >
-              {{ btn.label }}
+              {{ $t(btn.label) }}
             </router-link>
 
             <router-link
@@ -37,7 +37,7 @@
                   : 'bg-white border border-gray-300 hover:bg-gray-50 ',
               ]"
             >
-              {{ button.label }}
+              {{ $t(button.label) }}
             </router-link>
 
             <router-link to="/Hostel">
@@ -48,7 +48,7 @@
               >
                 <MdExitIcon class="mr-[5px]" w="25px" h="60px" />
                 <button class="text-red-500 font-bold text-[17px]">
-                  Выход
+                  {{ $t("header.leave") }}
                 </button>
               </div>
             </router-link>
@@ -99,16 +99,16 @@ export default {
       isAdmin: false,
       allUsers: [],
       buttons: [
-        { label: "Профиль", isActive: false, link: "/Profile" },
-        { label: "Общежитие", isActive: true, link: "/Hostel" },
-        { label: "Бронировать", isActive: false, link: "/Search" },
-        { label: "Пропуск", isActive: false, link: "/Rules" },
-        { label: "Жалоба", isActive: false, link: "/Complaint" },
+        { label: "header.profil", isActive: true, link: "/Profile" },
+        { label: "header.hotel", isActive: false, link: "/Hostel" },
+        { label: "header.book", isActive: false, link: "/Search" },
+        { label: "header.card", isActive: false, link: "/Rules" },
+        { label: "header.complaint", isActive: false, link: "/Complaint" },
       ],
       adminButtons: [
-        { label: "Список", isActive: false, link: "/SearchUser" },
-        { label: "Запросы", isActive: false, link: "/Zapros" },
-        { label: "Жалоба", isActive: false, link: "/AdminComplaint" },
+        { label: "header.adminList", isActive: false, link: "/SearchUser" },
+        { label: "header.request", isActive: false, link: "/Zapros" },
+        { label: "header.complaint", isActive: false, link: "/AdminComplaint" },
       ],
     };
   },

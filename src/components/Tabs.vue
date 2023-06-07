@@ -14,7 +14,8 @@
           ]"
           @click="setActiveTab(1)"
           aria-current="page"
-          >Общежитие №1</a
+        >
+          {{ $t("book.obsh1") }}</a
         >
       </li>
       <li class="mr-2">
@@ -28,7 +29,7 @@
           ]"
           @click="setActiveTab(2)"
           aria-current="page"
-          >Общежитие №2</a
+          >{{ $t("book.obsh2") }}</a
         >
       </li>
       <li class="mr-2">
@@ -42,7 +43,7 @@
           ]"
           @click="setActiveTab(3)"
           aria-current="page"
-          >Общежитие №3</a
+          >{{ $t("book.obsh3") }}</a
         >
       </li>
     </ul>

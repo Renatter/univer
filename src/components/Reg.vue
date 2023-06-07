@@ -4,7 +4,7 @@
     <div class="reg-bg bg-[#FFFF]">
       <div v-if="!currentUser" class="bg-[#FFFF] z">
         <h1 class="text-4xl font-bold text-center text-blue-500 bg-[#FFFF]">
-          Register!
+          {{ $t("reg.reg") }}!
         </h1>
 
         <form @submit.prevent="register" class="bg-[#FFFF]">
@@ -13,7 +13,8 @@
               <label
                 for="text"
                 class="block mb-2 text-sm font-semibold text-gray-900 text-[18px] bg-[#FFFF]"
-                >FirstName</label
+              >
+                {{ $t("reg.FirstName") }}</label
               >
               <input
                 type="text"
@@ -28,7 +29,7 @@
               <label
                 for="text"
                 class="block mb-2 text-sm font-semibold text-gray-900 text-[18px] bg-[#FFFF]"
-                >LastName</label
+                >{{ $t("reg.LastName") }}</label
               >
               <input
                 type="text"
@@ -42,7 +43,9 @@
           </div>
 
           <div class="Pol bg-[#FFFF]">
-            <h3 class="font-semibold text-gray-900 bg-[#FFFF]">Пол</h3>
+            <h3 class="font-semibold text-gray-900 bg-[#FFFF]">
+              {{ $t("reg.Paul") }}
+            </h3>
             <ul
               class="items-center w-[200px] text-sm font-semibold text-gray-900 bg-white sm:flex bg-[#FFFF]"
             >
@@ -59,7 +62,7 @@
                   <label
                     for="horizontal-list-radio-license"
                     class="w-full text-[20px] ml-[5px] pt-[5px] font-medium text-gray-900 bg-[#FFFF]"
-                    >Муж
+                    >{{ $t("reg.man") }}
                   </label>
                 </div>
               </li>
@@ -76,7 +79,7 @@
                   <label
                     for="horizontal-list-radio-id"
                     class="bg-[#FFFF] w-full text-[20px] ml-[5px] pt-[5px] font-medium text-gray-900 dark:text-gray-300"
-                    >Жен</label
+                    >{{ $t("reg.girl") }}</label
                   >
                 </div>
               </li>
@@ -88,7 +91,7 @@
               <label
                 for="letters"
                 class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white text-[18px] bg-[#FFFF]"
-                >Corpus</label
+                >{{ $t("reg.Corpus") }}</label
               >
               <select
                 id="letters"
@@ -110,7 +113,7 @@
               <label
                 for="countries"
                 class="bg-[#FFFF] block mb-2 text-sm font-semibold text-gray-900 dark:text-white text-[18px]"
-                >Group</label
+                >{{ $t("reg.group") }}</label
               >
               <select
                 id="countries"
@@ -133,7 +136,7 @@
               <label
                 for="text"
                 class="block mb-2 text-sm font-semibold text-gray-900 text-[18px] bg-[#FFFF]"
-                >Email</label
+                >{{ $t("reg.email") }}</label
               >
               <input
                 v-model="email"
@@ -160,7 +163,7 @@
             <label
               for="password"
               class="block mb-2 text-sm font-semibold text-gray-900 text-[18px] bg-[#FFFF]"
-              >Your password</label
+              >{{ $t("reg.pas") }}</label
             >
             <div class="flex-box items-center bg-[#FFFF]">
               <input
@@ -184,12 +187,12 @@
           <button
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-[18px]"
           >
-            Register
+            {{ $t("reg.reg") }}
           </button>
         </form>
-        <router-link to="/Login" class="text-blue-700 bg-[#FFFF]"
-          >У меня есть аккаунт</router-link
-        >
+        <router-link to="/Login" class="text-blue-700 bg-[#FFFF]">{{
+          $t("reg.have")
+        }}</router-link>
       </div>
     </div>
   </div>

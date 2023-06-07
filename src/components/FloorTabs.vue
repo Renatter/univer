@@ -8,12 +8,13 @@
         :class="[
           'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
           floorTab === 1
-            ? 'text-[#1e40af] bg-[#94a3b8] active'
-            : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
+            ? 'text-[#1e293b] bg-[#d1d5db]'
+            : 'hover:text-[#1e293b] hover:bg-[#1e293b] ',
         ]"
         @click="floactiveTab(1)"
         aria-current="page"
-        >1 этаж</a
+      >
+        {{ $t("book.floor1") }}</a
       >
 
       <a
@@ -21,24 +22,26 @@
         :class="[
           'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
           floorTab === 2
-            ? 'text-[#1e40af] bg-[#94a3b8] active'
-            : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
+            ? 'text-[#1e293b]  bg-[#d1d5db]'
+            : 'hover:text-[#1e293b] hover:bg-[#1e293b] dark:hover:bg-gray-800 dark:hover:text-white',
         ]"
         @click="floactiveTab(2)"
         aria-current="page"
-        >2 этаж</a
+      >
+        {{ $t("book.floor2") }}</a
       >
       <a
         href="#"
         :class="[
           'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
           floorTab === 3
-            ? 'text-[#1e40af] bg-[#94a3b8] active'
-            : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
+            ? 'text-[#1e293b]  bg-[#d1d5db]'
+            : 'hover:text-[#1e293b] hover:bg-[#1e293b] dark:hover:bg-gray-800 dark:hover:text-white',
         ]"
         @click="floactiveTab(3)"
         aria-current="page"
-        >3 этаж</a
+      >
+        {{ $t("book.floor3") }}</a
       >
 
       <a
@@ -46,12 +49,13 @@
         :class="[
           'inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg',
           floorTab === 4
-            ? 'text-[#1e40af] bg-[#94a3b8] active'
-            : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white',
+            ? 'text-[#1e293b] bg-[#d1d5db]'
+            : 'hover:text-[#1e293b] hover:bg-[#1e293b] dark:hover:bg-gray-800 dark:hover:text-white',
         ]"
         @click="floactiveTab(4)"
         aria-current="page"
-        >4 этаж</a
+      >
+        {{ $t("book.floor4") }}</a
       >
     </ul>
   </div>
@@ -73,4 +77,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+ul a {
+  transition: background-color 0.3s ease;
+}
+
+ul a.active,
+ul a:hover {
+  background-color: #d1d5db;
+}
+</style>

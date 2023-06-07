@@ -1,6 +1,8 @@
 <template>
   <div class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-full">
-    <h1 class="text-[25px]">Место {{ this.$route.params.id }}</h1>
+    <h1 class="text-[25px]">
+      {{ $t("pay.title") }} {{ this.$route.params.id }}
+    </h1>
 
     <div>
       <div class="wrapper" id="app">
@@ -309,7 +311,7 @@
               @click="saveAccount"
               class="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
-              Оплата
+              {{ $t("pay.pau") }}
             </router-link>
           </div>
         </div>

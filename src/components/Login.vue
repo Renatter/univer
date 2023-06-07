@@ -3,7 +3,7 @@
     <div class="reg-bg">
       <div v-if="!currentUser" class="bg-[#FFFF]">
         <h1 class="text-4xl font-bold text-center text-blue-500 bg-[#FFFF]">
-          Login!
+          {{ $t("reg.login") }}
         </h1>
 
         <form @submit.prevent="sign" class="pt-[50px] bg-[#FFFF]">
@@ -12,7 +12,8 @@
               <label
                 for="text"
                 class="block mb-2 text-sm font-medium text-gray-900 text-[18px] bg-[#FFFF]"
-                >Email</label
+              >
+                {{ $t("reg.email") }}</label
               >
               <input
                 v-model="email"
@@ -39,7 +40,7 @@
             <label
               for="password"
               class="block mb-2 text-sm font-medium text-gray-900 text-[18px] bg-[#FFFF]"
-              >Your password</label
+              >{{ $t("reg.pas") }}</label
             >
             <div class="flex-box items-center bg-[#FFFF]">
               <input
@@ -56,14 +57,14 @@
                 class="w-7 h-7 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 text-[18px]"
                 v-model="showPassword"
               />
-              <p class="ml-[15px] bg-[#FFFF]">Show</p>
+              <p class="ml-[15px] bg-[#FFFF]">{{ $t("reg.show") }}</p>
             </div>
           </div>
 
           <button
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-[18px]"
           >
-            Login
+            {{ $t("reg.join") }}
           </button>
         </form>
         <router-link to="/register" class="text-blue-700 bg-[#FFFF]"

@@ -55,10 +55,10 @@
                 class="mt-[15px] focus:outline-none text-white bg-[#86efac] hover:bg-[#51d180] focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 0"
                 @click="uploadImage"
               >
-                Добавить фото
+                {{ $t("profil.addPht") }}
               </button>
               <p v-if="textImg" class="text-[#4ade80]bg-[#FFFF]">
-                Нажмите Save
+                {{ $t("profil.savePht") }}
               </p>
             </div>
             <div v-else>
@@ -104,18 +104,20 @@
               <div class="info_list bg-[#FFFF]">
                 <p class="text-[#94a3b8] pt-[34px] bg-[#FFFF]">Пол</p>
                 <p class="text-[#94a3b8] pt-[46px] bg-[#FFFF]">
-                  Дата регистрации
+                  {{ $t("profil.dateReg") }}
                 </p>
                 <p class="text-[#94a3b8] pt-[34px] bg-[#FFFF]">
-                  Номер телефона
+                  {{ $t("profil.phn") }}
                 </p>
-                <p class="text-[#94a3b8] pt-[34px] bg-[#FFFF]">Эл. почта</p>
+                <p class="text-[#94a3b8] pt-[34px] bg-[#FFFF]">
+                  {{ $t("profil.email") }}
+                </p>
                 <p class="text-[#94a3b8] pt-[34px] bg-[#FFFF]">Корпус</p>
                 <p class="text-[#94a3b8] pt-[50px] bg-[#FFFF] mb-[25px]">
-                  Группа
+                  {{ $t("profil.group") }}
                 </p>
                 <p class="text-[#94a3b8] pt-[50px] bg-[#FFFF] mb-[25px]">
-                  Комната
+                  {{ $t("profil.room") }}
                 </p>
                 <button
                   v-if="!isEditing"
@@ -123,7 +125,7 @@
                   type="button"
                   class="focus:outline-none mt-[5px] text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 0"
                 >
-                  Редактировать
+                  {{ $t("profil.tool") }}
                 </button>
                 <div v-else class="bg-[#FFFF]">
                   <button
@@ -131,7 +133,7 @@
                     type="button"
                     class="w-[200px] focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-[7px]"
                   >
-                    Save
+                    {{ $t("profil.save") }}
                   </button>
                 </div>
               </div>
@@ -155,7 +157,8 @@
                             <label
                               for="horizontal-list-radio-license"
                               class="w-full text-[20px] ml-[5px] pt-[5px] font-medium text-gray-900 bg-[#FFFF]"
-                              >Муж
+                            >
+                              {{ $t("reg.man") }}
                             </label>
                           </div>
                         </li>
@@ -172,7 +175,8 @@
                             <label
                               for="horizontal-list-radio-id"
                               class="w-full text-[20px] ml-[5px] pt-[5px] font-medium text-gray-900 dark:text-gray-300 bg-[#FFFF]"
-                              >Жен</label
+                            >
+                              {{ $t("reg.girl") }}</label
                             >
                           </div>
                         </li>
@@ -274,20 +278,22 @@
                     v-if="dormitory && payment"
                     class="text-[#b3b3b3] pt-[44px] font-bold bg-[#FFFF] mb-[32px]"
                   >
-                    Общежитие: {{ dormitory }} Этаж {{ floor }} Комната:
+                    {{ $t("profil.obsh") }}: {{ dormitory }}
+                    {{ $t("profil.floor") }} {{ floor }}
+                    {{ $t("profil.room") }}:
                     {{ room }}
                   </p>
                   <p
                     v-if="queue"
                     class="text-[#e11d48] pt-[44px] font-bold bg-[#FFFF] mb-[32px]"
                   >
-                    Ожидаине ответа от администрации
+                    {{ $t("profil.waitAdmin") }}
                   </p>
                   <p
                     v-if="!payment"
                     class="text-[#b3b3b3] pt-[44px] font-bold bg-[#FFFF] mb-[32px]"
                   >
-                    сделайте бронирование
+                    {{ $t("profil.roomStatus") }}
                   </p>
                 </div>
                 <div>
@@ -297,14 +303,14 @@
                     @click="closePay"
                     class="pt-[11px] mt-[50px] focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                   >
-                    Отменить оплату
+                    {{ $t("profil.cancelPay") }}
                   </router-link>
                   <router-link
                     to="/Hostel"
                     v-if="!payment && !queue"
                     class="pt-[11px] mt-[65px] focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                   >
-                    Сделать бронирование
+                    {{ $t("profil.toBook") }}
                   </router-link>
                 </div>
               </div>

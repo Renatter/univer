@@ -2,6 +2,9 @@
   <div
     class="bg-[#FFFF] w-full ml-[25px] mb-[30px] rounded-[15px] p-[25px] min-h-[800px]"
   >
+    <h1 class="font-bold text-[30px] text-[#1D4ED8] mb-[15px]">
+      {{ $t("zapros.title") }}
+    </h1>
     <div class="flex justify-between">
       <div class="flex mb-[20px]">
         <input
@@ -14,9 +17,8 @@
           class="ml-[15px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           @click="Search(searchMode)"
         >
-          Search
+          {{ $t("zapros.seacbtn") }}
         </button>
-        {{}}
       </div>
       <div>
         <button
@@ -24,7 +26,7 @@
           v-if="!all"
           @click="all = true"
         >
-          All Users
+          {{ $t("zapros.allUser") }}
         </button>
       </div>
     </div>
@@ -40,11 +42,11 @@
         />
         <div>
           <div class="flex">
-            <p>Имя:</p>
+            <p>{{ $t("zapros.name") }}:</p>
             <p>{{ name }}</p>
           </div>
           <div class="flex">
-            <p>Фамилия :</p>
+            <p>{{ $t("zapros.lastName") }} :</p>
             <p>{{ surname }}</p>
           </div>
           <div class="flex">
@@ -52,7 +54,7 @@
             <p>{{ corpus }}</p>
           </div>
           <div class="flex">
-            <p>Группа :</p>
+            <p>{{ $t("zapros.group") }} :</p>
             <p>{{ group }}</p>
           </div>
         </div>
@@ -69,11 +71,11 @@
           />
           <div>
             <div class="flex">
-              <p>Имя:</p>
+              <p>{{ $t("zapros.name") }}:</p>
               <p>{{ user.fName }}</p>
             </div>
             <div class="flex">
-              <p>Фамилия :</p>
+              <p>{{ $t("zapros.lastName") }} :</p>
               <p>{{ user.Name }}</p>
             </div>
             <div class="flex">
@@ -81,26 +83,26 @@
               <p>Ак</p>
             </div>
             <div class="flex">
-              <p>Группа :</p>
+              <p>{{ $t("zapros.group") }} :</p>
               <p>{{ user.group }}</p>
             </div>
 
             <div class="flex">
-              <p>Удастак :</p>
+              <p>{{ $t("zapros.udastak") }} :</p>
               <a target="new" :href="user.idcard" class="text-[#1d4ed8]">
-                Открыть
+                {{ $t("zapros.open") }}
               </a>
             </div>
             <div class="flex">
-              <p>Флюр :</p>
+              <p>{{ $t("zapros.flur") }} :</p>
               <a class="text-[#1d4ed8]" target="new" :href="user.fluorogra">
-                Открыть
+                {{ $t("zapros.open") }}
               </a>
             </div>
             <div class="flex">
-              <p>Стунд билет :</p>
+              <p>{{ $t("zapros.studCard") }} :</p>
               <a target="new" :href="user.studentcard" class="text-[#1d4ed8]">
-                Открыть
+                {{ $t("zapros.open") }}
               </a>
             </div>
           </div>
@@ -112,7 +114,7 @@
               type="button"
               class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 w-[130px]"
             >
-              Принять
+              <p>{{ $t("zapros.acept") }}</p>
             </button>
           </div>
           <div>
@@ -121,7 +123,7 @@
               class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               type="button"
             >
-              ОТКЛОНИТЬ
+              <p>{{ $t("zapros.rejec") }}</p>
             </button>
 
             <div
@@ -172,7 +174,7 @@
                       <h3
                         class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"
                       >
-                        Причина отклонения заявки
+                        <p>{{ $t("zapros.reason") }}</p>
                       </h3>
 
                       <textarea
@@ -180,7 +182,6 @@
                         id="message"
                         rows="4"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="  Причина отклонения заявки..."
                       ></textarea>
                     </div>
                     <div class="mt-[25px]">
@@ -189,14 +190,14 @@
                         type="button"
                         class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                       >
-                        Отклонить
+                        <p>{{ $t("zapros.rejec") }}</p>
                       </button>
                       <button
                         @click="hideModal"
                         type="button"
                         class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
                       >
-                        Отмена
+                        <p>{{ $t("zapros.otemena") }}</p>
                       </button>
                     </div>
                   </div>
@@ -212,14 +213,14 @@
       @click="previousPage"
       v-if="currentPage !== 1"
     >
-      Back
+      <p>{{ $t("zapros.back") }} :</p>
     </button>
     <button
       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
       @click="nextPage"
       v-if="currentPage !== totalPages"
     >
-      Next
+      <p>{{ $t("zapros.next") }}</p>
     </button>
   </div>
 </template>

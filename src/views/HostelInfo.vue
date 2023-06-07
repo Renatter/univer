@@ -30,9 +30,7 @@
           <div class="flex items-end pt-[25px]">
             <IosManIcon w="30px" h="30px" class="mr-[5px]" />
             <p class="mr-[5px] font-bold">Мест:</p>
-            <p class="mr-[5px]">{{ item.min }}</p>
-            из
-            <p class="ml-[5px]">{{ item.max }}</p>
+            <p class="mr-[5px]">192</p>
           </div>
           <div class="flex items-end pt-[25px]">
             <IosCropIcon w="30px" h="30px" class="mr-[5px]" />
@@ -54,7 +52,7 @@
             <IosBedIcon w="30px" h="30px" class="mr-[5px]" />
             <p class="mr-[5px] font-bold">Количество комнат:</p>
             <div class="ml-[15px]">
-              <p class="">2-хместные – {{ item.countRoom }}к <br /></p>
+              <p class="">3-хместные 64ком. <br /></p>
             </div>
           </div>
           <div class="mt-[25px]">

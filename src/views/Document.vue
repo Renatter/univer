@@ -2,7 +2,7 @@
   <div
     class="bg-[#FFFF] w-full ml-[25px] mb-[30px] rounded-[15px] p-[25px] min-h-[800px]"
   >
-  <h1 class="font-bold text-[30px] text-[#1D4ED8]">Отправка документов</h1>
+  <h1 class="font-bold text-[30px] text-[#1D4ED8]">{{ $t("zapros.title") }}</h1>
     <div v-if="queue">
       <div class="flex items-center justify-center pt-[200px]">
         <div role="status">
@@ -25,7 +25,7 @@
         </div>
       </div>
       <p class="text-center text-[#1d4ed8] font-bold text-[30px] pt-[25px]">
-        ждите ответа от администрации
+        {{ $t("zapros.wait") }}
       </p>
     </div>
     <div v-if="access">
@@ -37,8 +37,8 @@
       </div>
       <div class="">
         <p class="text-center text-[#31C48D] font-bold text-[30px] pt-[25px]">
-          Можете Бронировать
-         <div> <router-link to="/Search"  type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Бронировать</router-link></div>
+          {{ $t("zapros.success") }}
+         <div> <router-link to="/Search"  type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">  {{ $t("zapros.book") }}</router-link></div>
         </p>
       </div>
     </div>
@@ -52,19 +52,19 @@
       </div>
       <div class="">
         <p class="text-center text-[#E02424] font-bold text-[30px] pt-[25px]">
-         Откланен
-         <div class="text-[20px] text-[#64748b]">Причина: {{ rejectMsg }}</div>
+          {{ $t("zapros.Rejected") }}
+         <div class="text-[20px] text-[#64748b]">  {{ $t("zapros.Reason") }} : {{ rejectMsg }}</div>
          <div> 
-          <button @click="repeatDocument" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Повторить</button></div>
+          <button @click="repeatDocument" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"> {{ $t("zapros.repeat") }}</button></div>
         </p>
       </div>
     </div>
     <div  v-if="!queue && !access  && !rejected">
       <div>
         <label
-          class="block text-sm font-medium text-gray-900 dark:text-white pt-[50px] text-[25px] mb-[15px]"
+          class="block text-sm font-medium text-gray-900 dark:text-white pt-[50px] text-[35px] mb-[15px]"
           for="file_input"
-          >Удостоверение личности</label
+          >{{ $t("zapros.udostak") }}</label
         >
         <div>
           <input
@@ -80,14 +80,14 @@
               :href="idcardUrl"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
-              Открыть документ
+            {{ $t("zapros.openDoc") }}
             </a>
             <button
               target="new"
               @click="delteIdcard"
               class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
             >
-              Удалить
+            {{ $t("zapros.deleteDoc") }}
             </button>
           </div>
         </div>
@@ -96,23 +96,23 @@
             @click="uploadImage"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
-            Загрузить
+          {{ $t("zapros.downl") }}
           </button>
           <button
             v-if="file || idcardUrl"
             @click="resetFileInput"
             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
           >
-            Очистить
+          {{ $t("zapros.clear") }}
           </button>
         </div>
       </div>
 
       <div>
         <label
-          class="block text-sm font-medium text-gray-900 dark:text-white pt-[50px] text-[25px] mb-[15px]"
+          class="block text-sm font-medium text-gray-900 dark:text-white pt-[50px] text-[35px] mb-[15px]"
           for="file_input1"
-          >Флюорография</label
+          >  {{ $t("zapros.flur") }}</label
         >
         <div>
           <input
@@ -128,14 +128,14 @@
               :href="flurUrl"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
-              Открыть документ
+               {{ $t("zapros.openDoc") }} 
             </a>
             <button
               target="new"
               @click="delteFlur"
               class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
             >
-              Удалить
+               {{ $t("zapros.deleteDoc") }}
             </button>
           </div>
         </div>
@@ -144,23 +144,23 @@
             @click="uploadFlur"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
-            Загрузить
+          {{ $t("zapros.downl") }}
           </button>
           <button
             v-if="file1"
             @click="resetFileInput1"
             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
           >
-            Очистить
+          {{ $t("zapros.clear") }}
           </button>
         </div>
       </div>
 
       <div>
         <label
-          class="block text-sm font-medium text-gray-900 dark:text-white pt-[50px] text-[25px] mb-[15px]"
+          class="block text-sm font-medium text-gray-900 dark:text-white pt-[50px] text-[35px] mb-[15px]"
           for="file_input2"
-          >Студенческий билет</label
+          > {{ $t("zapros.studCard") }}</label
         >
         <div>
           <input
@@ -176,14 +176,14 @@
               :href="studentUrl"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
-              Открыть документ
+               {{ $t("zapros.openDoc") }} 
             </a>
             <button
               target="new"
               @click="delteStud"
               class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
             >
-              Удалить
+               {{ $t("zapros.deleteDoc") }}
             </button>
           </div>
         </div>
@@ -192,23 +192,23 @@
             @click="uploadStudent"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
-            Загрузить
+             {{ $t("zapros.downl") }}
           </button>
           <button
             v-if="file2"
             @click="resetFileInput2"
             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
           >
-            Очистить
+          {{ $t("zapros.clear") }}
           </button>
         </div>
       </div>
       <div  v-if="idcardUrl && flurUrl && studentUrl">
-        <p
-        class="text-[#31C48D] pt-[55px]"
+        <p 
+        class="text-[#31C48D] pt-[55px] text-[25px]"
        
       >
-        все документы загружены можете отправлять
+      {{ $t("zapros.alert") }}
       </p>
       <button
       
@@ -216,7 +216,7 @@
         type="button"
         class="mt-[25px] focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
       >
-        Отправить документы
+      {{ $t("zapros.sharedDoc") }}
       </button>
       </div>
       

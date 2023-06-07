@@ -1,5 +1,8 @@
 <template>
   <div class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-full">
+    <h1 class="font-bold text-[30px] text-[#1D4ED8] mb-[15px]">
+      {{ $t("searchUser.title") }}
+    </h1>
     <div class="flex justify-between">
       <div class="flex mb-[20px]">
         <input
@@ -12,7 +15,7 @@
           class="ml-[15px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           @click="Search(searchMode)"
         >
-          Search
+          {{ $t("searchUser.seacbtn") }}
         </button>
       </div>
       <div>
@@ -21,7 +24,7 @@
           v-if="!all"
           @click="all = true"
         >
-          All Users
+          {{ $t("searchUser.allUser") }}
         </button>
       </div>
     </div>
@@ -37,11 +40,11 @@
         />
         <div>
           <div class="flex">
-            <p>Имя:</p>
+            <p>{{ $t("searchUser.name") }}:</p>
             <p>{{ name }}</p>
           </div>
           <div class="flex">
-            <p>Фамилия :</p>
+            <p>{{ $t("searchUser.lastName") }} :</p>
             <p>{{ surname }}</p>
           </div>
           <div class="flex">
@@ -49,7 +52,7 @@
             <p>{{ corpus }}</p>
           </div>
           <div class="flex">
-            <p>Группа :</p>
+            <p>{{ $t("searchUser.group") }} :</p>
             <p>{{ group }}</p>
           </div>
         </div>
@@ -71,11 +74,11 @@
         />
         <div>
           <div class="flex">
-            <p>Имя:</p>
+            <p>{{ $t("searchUser.name") }}:</p>
             <p>{{ user.fName }}</p>
           </div>
           <div class="flex">
-            <p>Фамилия :</p>
+            <p>{{ $t("searchUser.lastName") }} :</p>
             <p>{{ user.Name }}</p>
           </div>
           <div class="flex">
@@ -83,7 +86,7 @@
             <p>{{ user.corpus }}</p>
           </div>
           <div class="flex">
-            <p>Группа :</p>
+            <p>{{ $t("searchUser.group") }} :</p>
             <p>{{ user.group }}</p>
           </div>
         </div>
@@ -94,14 +97,14 @@
       @click="previousPage"
       v-if="currentPage !== 1"
     >
-      Back
+      {{ $t("searchUser.back") }}
     </button>
     <button
       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
       @click="nextPage"
       v-if="currentPage !== totalPages"
     >
-      Next
+      {{ $t("searchUser.next") }}
     </button>
   </div>
 </template>

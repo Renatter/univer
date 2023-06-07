@@ -6,7 +6,7 @@
       /></router-link>
       <div class="logo-text">
         <div class="text-white">ЖАНГИР ХАН УНИВЕРСИТЕТ</div>
-        <div class="text-white">Традиция, успех, качество</div>
+        <div class="text-white">{{ $t("header.headerText") }}</div>
       </div>
     </div>
 
@@ -29,8 +29,28 @@
         </router-link>
       </template>
       <div v-else class="s">
-        <button @click="goToLogin" class="btn mr-[15px]">Войти</button>
-        <button @click="goToReg" class="btn">Регистрация</button>
+        <button @click="goToLogin" class="btn mr-[15px]">
+          {{ $t("header.login") }}
+        </button>
+        <button @click="goToReg" class="btn">
+          {{ $t("header.reg") }}
+        </button>
+      </div>
+      <div class="">
+        <button @click="setLocale('ru')" class="ml-[15px]">
+          <img
+            src="../assets/free-icon-russia-3373300.png"
+            alt=""
+            class="h-[30px] w-[30px] rounded-[5000px]"
+          />
+        </button>
+        <button @click="setLocale('kz')">
+          <img
+            src="../assets/free-icon-kazakhstan-6211496.png"
+            alt=""
+            class="h-[30px] w-[30px] rounded-[5000px] ml-[10px]"
+          />
+        </button>
       </div>
     </div>
   </div>
@@ -48,6 +68,9 @@ export default {
     };
   },
   methods: {
+    setLocale(locale) {
+      this.$i18n.locale = locale;
+    },
     goToLogin() {
       this.$router.push("/login");
     },

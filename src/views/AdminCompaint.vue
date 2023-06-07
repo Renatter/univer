@@ -2,6 +2,9 @@
   <div
     class="bg-[#FFFF] w-full ml-[25px] mb-[30px] rounded-[15px] p-[25px] min-h-[800px]"
   >
+    <h1 class="font-bold text-[30px] text-[#1D4ED8] mb-[15px]">
+      {{ $t("complaints.title") }}
+    </h1>
     <div class="flex justify-between">
       <div class="flex mb-[20px]">
         <input
@@ -14,9 +17,8 @@
           class="ml-[15px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           @click="Search(searchMode)"
         >
-          Search
+          {{ $t("complaints.seacbtn") }}
         </button>
-        {{}}
       </div>
       <div>
         <button
@@ -24,7 +26,7 @@
           v-if="!all"
           @click="all = true"
         >
-          All Users
+          {{ $t("complaints.allUser") }}
         </button>
       </div>
     </div>
@@ -40,11 +42,11 @@
         />
         <div>
           <div class="flex">
-            <p>Имя:</p>
+            <p>{{ $t("complaints.name") }}:</p>
             <p>{{ name }}</p>
           </div>
           <div class="flex">
-            <p>Фамилия :</p>
+            <p>{{ $t("complaints.lastName") }} :</p>
             <p>{{ surname }}</p>
           </div>
           <div class="flex">
@@ -52,7 +54,7 @@
             <p>{{ corpus }}</p>
           </div>
           <div class="flex">
-            <p>Группа :</p>
+            <p>{{ $t("complaints.group") }} :</p>
             <p>{{ group }}</p>
           </div>
         </div>
@@ -75,11 +77,11 @@
           />
           <div>
             <div class="flex">
-              <p>Имя:</p>
+              <p>{{ $t("complaints.name") }}:</p>
               <p>{{ user.fName }}</p>
             </div>
             <div class="flex">
-              <p>Фамилия :</p>
+              <p>{{ $t("complaints.lastName") }} :</p>
               <p>{{ user.Name }}</p>
             </div>
             <div class="flex">
@@ -87,7 +89,7 @@
               <p>Ак</p>
             </div>
             <div class="flex">
-              <p>Группа :</p>
+              <p>{{ $t("complaints.group") }} :</p>
               <p>{{ user.group }}</p>
             </div>
           </div>
@@ -99,7 +101,7 @@
               class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               type="button"
             >
-              Посмотреть
+              {{ $t("complaints.look") }}
             </button>
 
             <div
@@ -145,14 +147,14 @@
                         type="button"
                         class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                       >
-                        Сделано
+                        {{ $t("complaints.accept") }}
                       </button>
                       <button
                         @click="hideModal"
                         type="button"
                         class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
                       >
-                        Отмена
+                        {{ $t("complaints.otemne") }}
                       </button>
                     </div>
                   </div>
@@ -168,14 +170,14 @@
       @click="previousPage"
       v-if="currentPage !== 1"
     >
-      Back
+      {{ $t("complaints.back") }}
     </button>
     <button
       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
       @click="nextPage"
       v-if="currentPage !== totalPages"
     >
-      Next
+      {{ $t("complaints.next") }}
     </button>
   </div>
 </template>

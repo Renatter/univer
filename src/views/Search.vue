@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#FFFF] w-full ml-[25px] rounded-[15px] p-[25px] h-full">
-    <h1 class="font-bold text-[30px] text-[#1D4ED8]">Выбор мест</h1>
+    <h1 class="font-bold text-[30px] text-[#1D4ED8]">{{ $t("book.title") }}</h1>
     <div class="text-center pt-[25px]">
       <Tabs @tab-changed="handleTabChanged" />
       <div v-if="activeTab === 1" class="pt-[55px]">
@@ -29,10 +29,13 @@
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комната{{ selectedRoom.number }}
+              {{ $t("book.room") }} {{ selectedRoom.number }}
             </p>
 
-            <p>Занято {{ users.length }}из 3 мест</p>
+            <p>
+              {{ $t("book.have") }} {{ users.length }} / 3
+              {{ $t("book.occupied") }}
+            </p>
 
             <div
               class="pt-[15px]"
@@ -48,8 +51,8 @@
                 :to="{ path: '/Payment/' + selectedRoom.number }"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Оплатить</router-link
-              >
+                {{ $t("book.pay") }}
+              </router-link>
             </div>
             <div
               class="pt-[15px]"
@@ -65,8 +68,8 @@
                 to="/Document"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Отправить документы</router-link
-              >
+                {{ $t("book.spend") }}
+              </router-link>
             </div>
           </div>
 
@@ -76,16 +79,22 @@
               class="student flex border-[3px] rounded-[15px] p-[10px] mb-[15px] w-[450px]"
             >
               <img
+                v-if="user.ImageUrl"
                 class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
                 :src="user.ImageUrl"
               />
+              <img
+                v-else
+                class="rounded-full w-[60px] max-h-[60px] mr-[7px]"
+                src="https://uhd.name/uploads/posts/2023-03/1679056281_uhd-name-p-zaza-napoli-bez-makiyazha-instagram-85.jpg"
+              />
               <div>
                 <div class="flex">
-                  <p>Имя:</p>
+                  <p>{{ $t("book.name") }} :</p>
                   <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
-                  <p>Фамилия :</p>
+                  <p>{{ $t("book.lastName") }} :</p>
                   <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
@@ -93,7 +102,7 @@
                   <p>{{ user.corpus }}</p>
                 </div>
                 <div class="flex">
-                  <p>Группа :</p>
+                  <p>{{ $t("book.group") }} :</p>
                   <p>{{ user.group }}</p>
                 </div>
               </div>
@@ -115,18 +124,46 @@
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комната{{ selectedRoom.number }}
+              {{ $t("book.room") }}{{ selectedRoom.number }}
             </p>
 
-            <p>Занято {{ users.length }}из 3 мест</p>
+            <p>
+              {{ $t("book.have") }} {{ users.length }} / 3
+              {{ $t("book.occupied") }}
+            </p>
 
-            <div class="pt-[15px]" v-if="currentUser && users.length < 3">
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === true
+              "
+            >
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Pay</router-link
+                {{ $t("book.pay") }}</router-link
+              >
+            </div>
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === null
+              "
+            >
+              <router-link
+                @click="saveAccount"
+                to="/Document"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                {{ $t("book.spend") }}</router-link
               >
             </div>
           </div>
@@ -141,11 +178,11 @@
               />
               <div>
                 <div class="flex">
-                  <p>Имя:</p>
+                  <p>{{ $t("book.name") }} :</p>
                   <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
-                  <p>Фамилия :</p>
+                  <p>{{ $t("book.lastName") }} :</p>
                   <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
@@ -153,7 +190,7 @@
                   <p>{{ user.corpus }}</p>
                 </div>
                 <div class="flex">
-                  <p>Группа :</p>
+                  <p>{{ $t("book.group") }} :</p>
                   <p>{{ user.group }}</p>
                 </div>
               </div>
@@ -175,18 +212,46 @@
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комната{{ selectedRoom.number }}
+              {{ $t("book.room") }}{{ selectedRoom.number }}
             </p>
 
-            <p>Занято {{ users.length }}из 3 мест</p>
+            <p>
+              {{ $t("book.have") }} {{ users.length }} / 3
+              {{ $t("book.occupied") }}
+            </p>
 
-            <div class="pt-[15px]" v-if="currentUser && users.length < 3">
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === true
+              "
+            >
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Pay</router-link
+                {{ $t("book.pay") }}</router-link
+              >
+            </div>
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === null
+              "
+            >
+              <router-link
+                @click="saveAccount"
+                to="/Document"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                {{ $t("book.spend") }}</router-link
               >
             </div>
           </div>
@@ -201,11 +266,11 @@
               />
               <div>
                 <div class="flex">
-                  <p>Имя:</p>
+                  <p>{{ $t("book.name") }} :</p>
                   <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
-                  <p>Фамилия :</p>
+                  <p>{{ $t("book.lastName") }} :</p>
                   <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
@@ -213,7 +278,7 @@
                   <p>{{ user.corpus }}</p>
                 </div>
                 <div class="flex">
-                  <p>Группа :</p>
+                  <p>{{ $t("book.group") }} :</p>
                   <p>{{ user.group }}</p>
                 </div>
               </div>
@@ -235,18 +300,46 @@
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комната{{ selectedRoom.number }}
+              {{ $t("book.room") }}{{ selectedRoom.number }}
             </p>
 
-            <p>Занято {{ users.length }}из 3 мест</p>
+            <p>
+              {{ $t("book.have") }} {{ users.length }} / 3
+              {{ $t("book.occupied") }}
+            </p>
 
-            <div class="pt-[15px]" v-if="currentUser && users.length < 3">
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === true
+              "
+            >
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Pay</router-link
+                {{ $t("book.pay") }}</router-link
+              >
+            </div>
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === null
+              "
+            >
+              <router-link
+                @click="saveAccount"
+                to="/Document"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                {{ $t("book.spend") }}</router-link
               >
             </div>
           </div>
@@ -261,11 +354,11 @@
               />
               <div>
                 <div class="flex">
-                  <p>Имя:</p>
+                  <p>{{ $t("book.name") }} :</p>
                   <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
-                  <p>Фамилия :</p>
+                  <p>{{ $t("book.lastName") }} :</p>
                   <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
@@ -273,7 +366,7 @@
                   <p>{{ user.corpus }}</p>
                 </div>
                 <div class="flex">
-                  <p>Группа :</p>
+                  <p>{{ $t("book.group") }} :</p>
                   <p>{{ user.group }}</p>
                 </div>
               </div>
@@ -296,18 +389,46 @@
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комната{{ selectedRoom.number }}
+              {{ $t("book.room") }}{{ selectedRoom.number }}
             </p>
 
-            <p>Занято {{ users.length }}из 3 мест</p>
+            <p>
+              {{ $t("book.have") }} {{ users.length }} / 3
+              {{ $t("book.occupied") }}
+            </p>
 
-            <div class="pt-[15px]" v-if="currentUser && users.length < 3">
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === true
+              "
+            >
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Pay</router-link
+                {{ $t("book.pay") }}</router-link
+              >
+            </div>
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === null
+              "
+            >
+              <router-link
+                @click="saveAccount"
+                to="/Document"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                {{ $t("book.spend") }}</router-link
               >
             </div>
           </div>
@@ -323,11 +444,11 @@
               />
               <div>
                 <div class="flex">
-                  <p>Имя:</p>
+                  <p>{{ $t("book.name") }} :</p>
                   <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
-                  <p>Фамилия :</p>
+                  <p>{{ $t("book.lastName") }} :</p>
                   <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
@@ -335,7 +456,7 @@
                   <p>{{ user.corpus }}</p>
                 </div>
                 <div class="flex">
-                  <p>Группа :</p>
+                  <p>{{ $t("book.group") }} :</p>
                   <p>{{ user.group }}</p>
                 </div>
               </div>
@@ -357,18 +478,46 @@
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комната{{ selectedRoom.number }}
+              {{ $t("book.room") }}{{ selectedRoom.number }}
             </p>
 
-            <p>Занято {{ users.length }}из 3 мест</p>
+            <p>
+              {{ $t("book.have") }} {{ users.length }} / 3
+              {{ $t("book.occupied") }}
+            </p>
 
-            <div class="pt-[15px]" v-if="currentUser && users.length < 3">
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === true
+              "
+            >
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Pay</router-link
+                {{ $t("book.pay") }}</router-link
+              >
+            </div>
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === null
+              "
+            >
+              <router-link
+                @click="saveAccount"
+                to="/Document"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                {{ $t("book.spend") }}</router-link
               >
             </div>
           </div>
@@ -383,11 +532,11 @@
               />
               <div>
                 <div class="flex">
-                  <p>Имя:</p>
+                  <p>{{ $t("book.name") }} :</p>
                   <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
-                  <p>Фамилия :</p>
+                  <p>{{ $t("book.lastName") }} :</p>
                   <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
@@ -395,7 +544,7 @@
                   <p>{{ user.corpus }}</p>
                 </div>
                 <div class="flex">
-                  <p>Группа :</p>
+                  <p>{{ $t("book.group") }} :</p>
                   <p>{{ user.group }}</p>
                 </div>
               </div>
@@ -417,18 +566,46 @@
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комната{{ selectedRoom.number }}
+              {{ $t("book.room") }}{{ selectedRoom.number }}
             </p>
 
-            <p>Занято {{ users.length }}из 3 мест</p>
+            <p>
+              {{ $t("book.have") }} {{ users.length }} / 3
+              {{ $t("book.occupied") }}
+            </p>
 
-            <div class="pt-[15px]" v-if="currentUser && users.length < 3">
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === true
+              "
+            >
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Pay</router-link
+                {{ $t("book.pay") }}</router-link
+              >
+            </div>
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === null
+              "
+            >
+              <router-link
+                @click="saveAccount"
+                to="/Document"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                {{ $t("book.spend") }}</router-link
               >
             </div>
           </div>
@@ -443,11 +620,11 @@
               />
               <div>
                 <div class="flex">
-                  <p>Имя:</p>
+                  <p>{{ $t("book.name") }} :</p>
                   <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
-                  <p>Фамилия :</p>
+                  <p>{{ $t("book.lastName") }} :</p>
                   <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
@@ -455,7 +632,7 @@
                   <p>{{ user.corpus }}</p>
                 </div>
                 <div class="flex">
-                  <p>Группа :</p>
+                  <p>{{ $t("book.group") }} :</p>
                   <p>{{ user.group }}</p>
                 </div>
               </div>
@@ -477,18 +654,46 @@
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комната{{ selectedRoom.number }}
+              {{ $t("book.room") }}{{ selectedRoom.number }}
             </p>
 
-            <p>Занято {{ users.length }}из 3 мест</p>
+            <p>
+              {{ $t("book.have") }} {{ users.length }} / 3
+              {{ $t("book.occupied") }}
+            </p>
 
-            <div class="pt-[15px]" v-if="currentUser && users.length < 3">
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === true
+              "
+            >
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Pay</router-link
+                {{ $t("book.pay") }}</router-link
+              >
+            </div>
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === null
+              "
+            >
+              <router-link
+                @click="saveAccount"
+                to="/Document"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                {{ $t("book.spend") }}</router-link
               >
             </div>
           </div>
@@ -503,11 +708,11 @@
               />
               <div>
                 <div class="flex">
-                  <p>Имя:</p>
+                  <p>{{ $t("book.name") }} :</p>
                   <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
-                  <p>Фамилия :</p>
+                  <p>{{ $t("book.lastName") }} :</p>
                   <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
@@ -515,7 +720,7 @@
                   <p>{{ user.corpus }}</p>
                 </div>
                 <div class="flex">
-                  <p>Группа :</p>
+                  <p>{{ $t("book.group") }} :</p>
                   <p>{{ user.group }}</p>
                 </div>
               </div>
@@ -538,18 +743,46 @@
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комната{{ selectedRoom.number }}
+              {{ $t("book.room") }}{{ selectedRoom.number }}
             </p>
 
-            <p>Занято {{ users.length }}из 3 мест</p>
+            <p>
+              {{ $t("book.have") }} {{ users.length }} / 3
+              {{ $t("book.occupied") }}
+            </p>
 
-            <div class="pt-[15px]" v-if="currentUser && users.length < 3">
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === true
+              "
+            >
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Pay</router-link
+                {{ $t("book.pay") }}</router-link
+              >
+            </div>
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === null
+              "
+            >
+              <router-link
+                @click="saveAccount"
+                to="/Document"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                {{ $t("book.spend") }}</router-link
               >
             </div>
           </div>
@@ -565,11 +798,11 @@
               />
               <div>
                 <div class="flex">
-                  <p>Имя:</p>
+                  <p>{{ $t("book.name") }} :</p>
                   <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
-                  <p>Фамилия :</p>
+                  <p>{{ $t("book.lastName") }} :</p>
                   <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
@@ -577,7 +810,7 @@
                   <p>{{ user.corpus }}</p>
                 </div>
                 <div class="flex">
-                  <p>Группа :</p>
+                  <p>{{ $t("book.group") }} :</p>
                   <p>{{ user.group }}</p>
                 </div>
               </div>
@@ -599,18 +832,46 @@
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комната{{ selectedRoom.number }}
+              {{ $t("book.room") }}{{ selectedRoom.number }}
             </p>
 
-            <p>Занято {{ users.length }}из 3 мест</p>
+            <p>
+              {{ $t("book.have") }} {{ users.length }} / 3
+              {{ $t("book.occupied") }}
+            </p>
 
-            <div class="pt-[15px]" v-if="currentUser && users.length < 3">
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === true
+              "
+            >
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Pay</router-link
+                {{ $t("book.pay") }}</router-link
+              >
+            </div>
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === null
+              "
+            >
+              <router-link
+                @click="saveAccount"
+                to="/Document"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                {{ $t("book.spend") }}</router-link
               >
             </div>
           </div>
@@ -625,11 +886,11 @@
               />
               <div>
                 <div class="flex">
-                  <p>Имя:</p>
+                  <p>{{ $t("book.name") }} :</p>
                   <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
-                  <p>Фамилия :</p>
+                  <p>{{ $t("book.lastName") }} :</p>
                   <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
@@ -637,7 +898,7 @@
                   <p>{{ user.corpus }}</p>
                 </div>
                 <div class="flex">
-                  <p>Группа :</p>
+                  <p>{{ $t("book.group") }} :</p>
                   <p>{{ user.group }}</p>
                 </div>
               </div>
@@ -659,18 +920,46 @@
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комната{{ selectedRoom.number }}
+              {{ $t("book.room") }}{{ selectedRoom.number }}
             </p>
 
-            <p>Занято {{ users.length }}из 3 мест</p>
+            <p>
+              {{ $t("book.have") }} {{ users.length }} / 3
+              {{ $t("book.occupied") }}
+            </p>
 
-            <div class="pt-[15px]" v-if="currentUser && users.length < 1">
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === true
+              "
+            >
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Pay</router-link
+                {{ $t("book.pay") }}</router-link
+              >
+            </div>
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === null
+              "
+            >
+              <router-link
+                @click="saveAccount"
+                to="/Document"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                {{ $t("book.spend") }}</router-link
               >
             </div>
           </div>
@@ -685,11 +974,11 @@
               />
               <div>
                 <div class="flex">
-                  <p>Имя:</p>
+                  <p>{{ $t("book.name") }} :</p>
                   <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
-                  <p>Фамилия :</p>
+                  <p>{{ $t("book.lastName") }} :</p>
                   <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
@@ -697,7 +986,7 @@
                   <p>{{ user.corpus }}</p>
                 </div>
                 <div class="flex">
-                  <p>Группа :</p>
+                  <p>{{ $t("book.group") }} :</p>
                   <p>{{ user.group }}</p>
                 </div>
               </div>
@@ -719,18 +1008,46 @@
         <div v-if="selectedRoom" class="flex pt-[50px] justify-between w-full">
           <div>
             <p class="text-[20px] text-blue-700">
-              Комната{{ selectedRoom.number }}
+              {{ $t("book.room") }}{{ selectedRoom.number }}
             </p>
 
-            <p>Занято {{ users.length }}из 3 мест</p>
+            <p>
+              {{ $t("book.have") }} {{ users.length }} / 3
+              {{ $t("book.occupied") }}
+            </p>
 
-            <div class="pt-[15px]" v-if="currentUser && users.length < 3">
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === true
+              "
+            >
               <router-link
                 @click="saveAccount"
                 :to="{ path: '/Payment/' + selectedRoom.number }"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Pay</router-link
+                {{ $t("book.pay") }}</router-link
+              >
+            </div>
+            <div
+              class="pt-[15px]"
+              v-if="
+                currentUser &&
+                users.length < 3 &&
+                payment === false &&
+                access === null
+              "
+            >
+              <router-link
+                @click="saveAccount"
+                to="/Document"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                {{ $t("book.spend") }}</router-link
               >
             </div>
           </div>
@@ -745,11 +1062,11 @@
               />
               <div>
                 <div class="flex">
-                  <p>Имя:</p>
+                  <p>{{ $t("book.name") }} :</p>
                   <p>{{ user.fName }}</p>
                 </div>
                 <div class="flex">
-                  <p>Фамилия :</p>
+                  <p>{{ $t("book.lastName") }} :</p>
                   <p>{{ user.Name }}</p>
                 </div>
                 <div class="flex">
@@ -757,7 +1074,7 @@
                   <p>{{ user.corpus }}</p>
                 </div>
                 <div class="flex">
-                  <p>Группа :</p>
+                  <p>{{ $t("book.group") }} :</p>
                   <p>{{ user.group }}</p>
                 </div>
               </div>

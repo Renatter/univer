@@ -25,14 +25,17 @@
         </div>
         <div class="">
           <p class="text-center text-[#E02424] font-bold text-[30px] pt-[25px]">
-            Страница доступна только для членов общежития
+            {{ $t("ticket.dostup") }}
           </p>
         </div>
       </div>
     </div>
     <div v-else>
+      <h1 class="font-bold text-[30px] text-[#1D4ED8]">
+        {{ $t("ticket.title") }}
+      </h1>
       <div>
-        <h2>Выберите шаблон грамоты:</h2>
+        <h2 class="text-[25px] my-[15px]">{{ $t("ticket.choise") }}:</h2>
 
         <div class="flex">
           <div
@@ -47,20 +50,40 @@
             />
           </div>
           <div>
-            <p class="pl-[20px]">Выбран {{ index }}</p>
-            <p v-if="selectedTemplate" class="pl-[20px]">Намжите создать</p>
+            <p class="pl-[20px] text-[#1d4ed8] text-[25px]">
+              {{ $t("ticket.chos") }} {{ index }}
+            </p>
+            <p v-if="selectedTemplate" class="pl-[20px] text-[#22c55e]">
+              {{ $t("ticket.enter") }}
+            </p>
           </div>
         </div>
 
-        <canvas ref="canvas" />
-        <button @click="createCertificate">Создать грамоту</button>
-        <br />
+        <canvas class="pt-[15px]" ref="canvas" />
+        <div class="flex gap-[15px] mt-[15px]">
+          <button
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            @click="createCertificate"
+          >
+            {{ $t("ticket.make") }}
+          </button>
+          <br />
 
-        <button @click="downloadImage" v-if="showCard">Скачать грамоту</button
-        ><br />
-        <button @click="clearCanvas" v-if="selectedTemplate && showCard">
-          Очистить
-        </button>
+          <button
+            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            @click="downloadImage"
+            v-if="showCard"
+          >
+            {{ $t("ticket.downl") }}</button
+          ><br />
+          <button
+            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+            @click="clearCanvas"
+            v-if="selectedTemplate && showCard"
+          >
+            {{ $t("ticket.delete") }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
