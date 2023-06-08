@@ -59,7 +59,14 @@
           </div>
         </div>
 
-        <canvas class="pt-[15px]" ref="canvas" />
+        <div class="flex items-center">
+          <canvas class="pt-[15px]" ref="canvas" />
+          <Qr
+            class="ml-[15px]"
+            v-if="showCard === true"
+            :data="`${fn} ${ln} ${corpus} ${group} Общ ${obsh} /  Этаж ${floor} /Комната ${room}`"
+          />
+        </div>
         <div class="flex gap-[15px] mt-[15px]">
           <button
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
@@ -90,6 +97,7 @@
 </template>
 
 <script>
+import Qr from "../components/Qr.vue";
 import { fabric } from "fabric";
 import { auth } from "../firebase/index";
 import { db } from "../firebase/index";
@@ -112,6 +120,9 @@ import {
   signOut,
 } from "firebase/auth";
 export default {
+  components: {
+    Qr,
+  },
   data() {
     return {
       payment: false,

@@ -319,7 +319,6 @@
         </div>
       </div>
     </div>
-    <div v-else><p class="text-[#dc2626]">Войдите в аккаунт</p></div>
   </div>
 </template>
 
