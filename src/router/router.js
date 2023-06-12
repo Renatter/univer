@@ -16,6 +16,7 @@ import Document from "../views/Document.vue"
 import Zapros from "../views/Zapros.vue"
 import Complaint from "../views/Complaint.vue"
 import AdminComplaint from "../views/AdminCompaint.vue"
+import HostelInfo1 from '../views/HostelInfo1.vue'
 const router = createRouter({
 
     history: createWebHistory(),
@@ -24,6 +25,11 @@ const router = createRouter({
             name: 'HelloWorld',
             component: HelloWorld,
 
+        },
+        {
+            path: '/HostelInfo1',
+            name: 'HostelInfo1',
+            component: HostelInfo1,
         },
         {
             path: '/register',
